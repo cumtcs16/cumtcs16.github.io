@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hexo</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    
+    <meta name="author" content="xiaoma"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">RARP协议</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">RARP协议</h1>
+        <div class="stuff">
+            <span>十二月 24, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h4 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h4><p>反向地址转换协议就是将局域网中某个主机的物理地址转换为IP地址，比如局域网中有一台主机只知道物理地址而不知道IP地址，那么可以通过RARP协议发出征求自身IP地址的广播请求，然后由RARP服务器负责回答。RARP协议广泛用于获取无盘工作站的IP地址。<br>反向地址转换协议（RARP）允许局域网的物理机器从网关服务器的 ARP 表或者缓存上请求其 IP 地址。网络管理员在局域网网关路由器里创建一个表以映射物理地址（MAC）和与其对应的 IP 地址。当设置一台新的机器时，其 RARP 客户机程序需要向路由器上的 RARP 服务器请求相应的 IP 地址。假设在路由表中已经设置了一个记录， RARP 服务器将会返回 IP 地址给机器，此机器就会存储起来以便日后使用。RARP 可以使用于以太网、光纤分布式数据接口及令牌环LAN 。</p>
+<h4 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h4><ol>
+<li>给主机发送一个本地的RARP广播，在此广播包中，声明自己的MAC地址并且请求任何收到此请求的RARP服务器分配一个IP地址；</li>
+<li>本地网段上的RARP服务器收到此请求后，检查其RARP列表，查找该MAC地址对应的IP地址；</li>
+<li>如果存在，RARP服务器就给源主机发送一个响应数据包并将此IP地址提供给对方主机使用；</li>
+<li>如果不存在，RARP服务器对此不做任何的响应；</li>
+<li>源主机收到从RARP服务器的响应信息，就利用得到的IP地址进行通讯；如果一直没有收到RARP服务器的响应信息，表示初始化失败。</li>
+</ol>
+<h4 id="关于RARP协议的思考："><a href="#关于RARP协议的思考：" class="headerlink" title="关于RARP协议的思考："></a>关于RARP协议的<font color="red">思考：</font></h4><font face="楷体">今天我们接着然后往下研究，局域网在很久以前是无盘工作站的，无盘工作站是硬盘和操作系统分开的，这样由于主机上没有硬盘故不能保存IP地址信息，而MAC地址是永久存储在网卡中的，所以此时主机知道自己的MAC但不知道IP，但是要通信必须有IP地址啊，否则FTP/TFTP/SMTP等应用层协议都不能使用了，如果局域网管理员一台一台的给主机配置IP就太麻烦了，此时你可能会想到用DHCP啊，DHCP就是用于自动获取IP地址的，正确又不完全正确，正确是DHCP确实能解决这个问题，不正确是因为在很久以前DHCP是没有的（DHCP RFC文档 2131在1997年3月份才发布），那么这个问题该如何解决呢？答案就是今天探讨的RARP（RFC文档编号903，发布日期1984年6月份），通常情况下我们把RARP理解为把MAC地址映射为IP地址，如果你还套用ARP的解析流程和应用场景去分析RARP那就越想越不通了，这里说的把MAC地址映射为IP地址实际上无盘主机在开机后，网卡引导程序就不淡定了，它会通过广播的方式询问局域网所有主机，有谁知道我的IP地址啊？RARP服务器收到这个报文后就会告诉它你的IP地址是多少，这样无盘主机就有IP地址了，就可以使用FTP快乐的下载文件了，直到BOOTP的出现，什么？怎么不是DHCP，确实在1985年9月份BOOTP出现并取代了RARP协议，编号是RFC 951，然后就一直到1997年DHCP的出现。</font>
+
+<p>至此我已经列出了三种可以分配IP地址的协议了，分别是<font color="blue">RARP、BOOTP、DHCP，</font>那这三种协议有什么<font color="red">区别</font>呢？</p>
+<ul>
+<li><p>RARP的实现是在数据链路层实现的，BOOTP和DHCP的实现是在UDP传输层实现的，这仅仅是表面上的区别，那优势呢，如果没有优势BOOTP就不会取代RARP了，我的理解是RARP工作在数据链路层就需要网卡去解析协议，而随着操作系统的发展，纯软件实现的网络协议内核比纯硬件网卡解析更加实惠，而BOOTP就是使用网络协议内核去解析的，欢迎大家拍砖共同探讨。</p>
+</li>
+<li><p>RARP服务器只能提供简单的地址分配，而且这些IP地址和MAC地址必须要提前在RARP服务器上配置好，而BOOTP和DHCP有更多复杂的功能，比如租约周期、地址池、网关和DNS服务器等，在这个年代你没有DNS只有IP也是不能上网的，除非你手动指定DNS服务器。另外BOOTP在获取到IP地址后客户端还会通过TFTP或者FTP协议去网络服务器上下载一个引导镜像文件。</p>
+</li>
+<li><p>DHCP是BOOTP的升级版本，增加了Option配置选项，而且DHCP可以分配之前已经分过的但当前没有使用的IP地址，提高了IP地址利用率。而BOOTP的IP地址和MAC地址的映射是事先配置好不能动态改变的。</p>
+</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#简介："><span class="toc-number">1.</span> <span class="toc-text">简介：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工作原理："><span class="toc-number">2.</span> <span class="toc-text">工作原理：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于RARP协议的思考："><span class="toc-number">3.</span> <span class="toc-text">关于RARP协议的思考：</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

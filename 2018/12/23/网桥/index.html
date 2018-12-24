@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hexo</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    
+    <meta name="author" content="xiaoma"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">网桥</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">网桥</h1>
+        <div class="stuff">
+            <span>十二月 23, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/数据链路层/">数据链路层</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h4 id="桥接的概念"><a href="#桥接的概念" class="headerlink" title="桥接的概念"></a>桥接的概念</h4><p>简单来说，桥接就是把一台机器上的若干个网络接口“连接”起来。其结果是，其中一个网口收到的报文会被复制给其他网口并发送出去。以使得网口之间的报文能够互相转。<br>如下图：主机A发送的报文被送到交换机S1的eth0口，由于eth0与eth1、eth2桥接在一起，故而报文被复制到eth1和eth2，并且发送出 去，然后被主机B和交换机S2接收到。而S2又会将报文转发给主机C、D。<br><img src="http://blog.chinaunix.net/photo/109828_100908155439.jpg" alt="桥接"></p>
+<h4 id="集线器（HUB）、网桥（又称交换机，switch）和路由器区别"><a href="#集线器（HUB）、网桥（又称交换机，switch）和路由器区别" class="headerlink" title="集线器（HUB）、网桥（又称交换机，switch）和路由器区别"></a>集线器（HUB）、网桥（又称交换机，switch）和路由器区别</h4><p>集线器: 不关心协议，只是单纯的把一个端口收到的数据复制到所有端口。<br>网桥: 理解L2链路层协议，在没有MAC地址学习成果的情况下和hub一样也是把数据帧复制到所有端口，再有MAC学习成果的情况下，数据帧会复制到对应端口。<br>路由器: 理解L3网络层协议，会根据路由表来转发封包。</p>
+<h4 id="网桥的地址学习"><a href="#网桥的地址学习" class="headerlink" title="网桥的地址学习"></a>网桥的地址学习</h4><p><img src="https://user-images.githubusercontent.com/20039046/39576692-99383d06-4f11-11e8-994b-206176c9da56.png" alt="网桥地址学习"></p>
+<font face="楷体">  一个简单的拓扑如上所示，在网桥刚上电（还没有进行地址学习）时，PC1给PC2发数据的时候，网桥会把PORT1上收到的数据同时复制给PORT2和PORT3上的主机。PC3收到这个包发现不是自己的会直接丢弃, PC2则会进行回复。这数据包一来一回的过程中，网桥就知道了PC1处在PORT1端口侧，PC2处在PORT2侧。下次他俩的通信就不需要再把数据转给PORT3端口了。<br>　　如果PC1给PC3发数据，由于没有PC3的MAC学习缓存，所以这个数据会同时复制到PORT2和PORT3端口，接下来就和上面一样的过程了。</font>
+
+<h4 id="网桥的功能"><a href="#网桥的功能" class="headerlink" title="网桥的功能"></a>网桥的功能</h4><p><font color="red">1.MAC学习：</font>学习MAC地址，起初，网桥是没有任何地址与端口的对应关系的，它发送数据，还是得想HUB一样，但是每发送一个数据，它都会关心数据包的来源MAC是从自己的哪个端口来的，由于学习，建立地址-端口的对照表（CAM表）。</p>
+<p><font color="red">2.报文转发：</font>每发送一个数据包，网桥都会提取其目的MAC地址，从自己的地址-端口对照表(CAM表)中查找由哪个端口把数据包发送出去。</p>
+<h4 id="网桥的基本特征"><a href="#网桥的基本特征" class="headerlink" title="网桥的基本特征"></a>网桥的基本特征</h4><p>1．网桥在数据链路层上实现局域网互连；<br>2．网桥能够互连两个采用不同数据链路层协议、不同传输介质与不同传输速率的网络<br>3．网桥以接收、存储、地址过滤与转发的方式实现互连的网络之间的通信；<br>4．网桥需要互连的网络在数据链路层以上采用相同的协议<br>5．网桥可以分隔两个网络之间的通信量，有利于改善互连网络的性能与安全性。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#桥接的概念"><span class="toc-number">1.</span> <span class="toc-text">桥接的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集线器（HUB）、网桥（又称交换机，switch）和路由器区别"><span class="toc-number">2.</span> <span class="toc-text">集线器（HUB）、网桥（又称交换机，switch）和路由器区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网桥的地址学习"><span class="toc-number">3.</span> <span class="toc-text">网桥的地址学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网桥的功能"><span class="toc-number">4.</span> <span class="toc-text">网桥的功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网桥的基本特征"><span class="toc-number">5.</span> <span class="toc-text">网桥的基本特征</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

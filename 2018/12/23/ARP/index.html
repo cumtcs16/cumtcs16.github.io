@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hexo</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    
+    <meta name="author" content="xiaoma"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+</html>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">ARP协议</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">ARP协议</h1>
+        <div class="stuff">
+            <span>十二月 23, 2018</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/数据链路层/">数据链路层</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="一、为什么要用ARP协议："><a href="#一、为什么要用ARP协议：" class="headerlink" title="一、为什么要用ARP协议："></a>一、为什么要用ARP协议：</h3><p>在局域网中，当主机或其它网络设备有数据要发送给另一个主机或设备时，它必须知道对方的网络层地址（即IP地址）。但是仅仅有IP地址是不够的，因为IP数据报文必须封装成帧才能通过物理网络发送，因此发送站还必须有接收站的物理地址，所以需要一个从IP地址到物理地址的映射。APR就是实现这个功能的协议。</p>
+<h3 id="二、ARP协议简介："><a href="#二、ARP协议简介：" class="headerlink" title="二、ARP协议简介："></a>二、ARP协议简介：</h3><p>地址解析协议，即ARP（Address Resolution Protocol），是根据IP地址获取物理地址的一个TCP/IP协议。主机发送信息时将包含目标IP地址的ARP请求广播到网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。</p>
+<p>ARP缓存：<br>ARP缓存是个用来储存IP地址和MAC地址的缓冲区，其本质就是一个IP地址–&gt;MAC地址的对应表，表中每一个条目分别记录了网络上其他主机的IP地址和对应的MAC地址。每一个以太网或令牌环网络适配器都有自己单独的表。当地址解析协议被询问一个已知IP地址节点的MAC地址时，先在ARP缓存中查看，若存在，就直接返回与之对应的MAC地址，若不存在，才发送ARP请求向局域网查询。<br>为使广播量最小，ARP维护IP地址到MAC地址映射的缓存以便将来使用。ARP缓存可以包含动态和静态项目。<font color="red">动态项目</font>随时间推移自动添加和删除。每个动态ARP缓存项的潜在生命周期是10分钟。新加到缓存中的项目带有时间戳，如果某个项目添加后2分钟内没有再使用，则此项目过期并从ARP缓存中删除；如果某个项目已在使用，则又收到2分钟的生命周期；如果某个项目始终在使用，则会另外收到2分钟的生命周期，一直到10分钟的最长生命周期。<font color="red">静态项目</font>一直保留在缓存中，直到重新启动计算机为止。</p>
+<font color="Coral">初学者请记住以下三句话：</font>
+
+<p>①ARP（Address Resolution Protocol）即地址解析协议， 用于实现从 IP 地址到 MAC 地址的映射，即询问目标IP对应的MAC地址。<br>②在网络通信中，主机和主机通信的数据包需要依据OSI模型从上到下进行数据封装，当数据封装完整后，再向外发出。所以在局域网的通信中，不仅需要源目IP地址的封装，也需要源目MAC的封装。<br>③一般情况下，上层应用程序更多关心IP地址而不关心MAC地址，所以需要通过ARP协议来获知目的主机的MAC地址，完成数据封装。</p>
+<h3 id="三、ARP报文结构："><a href="#三、ARP报文结构：" class="headerlink" title="三、ARP报文结构："></a>三、ARP报文结构：</h3><p><img src="http://learn.tsinghua.edu.cn/kejian/data/77130/138627/html-chunk/images/tcpip.arpformat.png" alt="ARP报文"></p>
+<ul>
+<li><p>硬件类型：表示硬件地址的类型。它的值为1表示以太网地址；</p>
+</li>
+<li><p>协议类型：表示要映射的协议地址类型。它的值为0x0800即表示IP地址；</p>
+</li>
+<li><p>硬件地址长度和协议地址长度分别指出硬件地址和协议地址的长度，以字节为单位。对于以太网上IP地址的ARP请求或应答来说，它们的值分别为6和4；</p>
+</li>
+<li><p>操作类型（OP）：1表示ARP请求，2表示ARP应答；</p>
+</li>
+<li><p>发送端MAC地址：发送方设备的硬件地址；</p>
+</li>
+<li><p>发送端IP地址：发送方设备的IP地址；</p>
+</li>
+<li><p>目标MAC地址：接收方设备的硬件地址。</p>
+</li>
+<li><p>目标IP地址：接收方设备的IP地址。</p>
+</li>
+</ul>
+<h3 id="四、ARP地址工作过程："><a href="#四、ARP地址工作过程：" class="headerlink" title="四、ARP地址工作过程："></a>四、ARP地址工作过程：</h3><p>假设主机A和B在同一个网段，主机A要向主机B发送信息。具体的地址解析过程如下：</p>
+<p>1.主机A首先查看自己的ARP表，确定其中是否包含有主机B对应的ARP表项。如果找到了对应的MAC地址，则主机A直接利用ARP表中的MAC地址，对IP数据包进行帧封装，并将数据包发送给主机B。</p>
+<p>2.如果主机A在ARP表中找不到对应的MAC地址，则将缓存该数据报文，然后以广播方式发送一个ARP请求报文。ARP请求报文中的发送端IP地址和发送端MAC地址为主机A的IP地址和MAC地址，目标IP地址和目标MAC地址为主机B的IP地址和全0的MAC地址。由于ARP请求报文以广播方式发送，该网段上的所有主机都可以接收到该请求，但只有被请求的主机（即主机B）会对该请求进行处理。</p>
+<p>3.主机B比较自己的IP地址和ARP请求报文中的目标IP地址，当两者相同时进行如下处理：将ARP请求报文中的发送端（即主机A）的IP地址和MAC地址存入自己的ARP表中。之后以单播方式发送ARP响应报文给主机A，其中包含了自己的MAC地址。</p>
+<p>4.主机A收到ARP响应报文后，将主机B的MAC地址加入到自己的ARP表中以用于后续报文的转发，同时将IP数据包进行封装后发送出去。</p>
+<p>注：本机ARP缓存是有生存期的，生存期结束后，将再次重复上面的过程。</p>
+<h3 id="五、ARP攻击"><a href="#五、ARP攻击" class="headerlink" title="五、ARP攻击"></a>五、ARP攻击</h3><h4 id="5-1-ARP欺骗"><a href="#5-1-ARP欺骗" class="headerlink" title="5.1 ARP欺骗"></a>5.1 ARP欺骗</h4><h5 id="5-1-1-ARP欺骗原理"><a href="#5-1-1-ARP欺骗原理" class="headerlink" title="5.1.1 ARP欺骗原理"></a>5.1.1 ARP欺骗原理</h5><p>   假设在同一局域网中，<font color="Aqua"> A为发方，B为接收方，C为攻击者。</font><br>   例如B的IP地址是192.168.0.254，其MAC地址为00-11-22-33-44-55，网上上的计算机A内ARP表会有这一笔ARP记录。攻击者发动攻击时，会大量发出已将B(192.168.0.254)的MAC地址篡改为C的MAC地址(00-55-44-33-22-11)的ARP数据包。那么网上上的计算机A若将此伪造的ARP写入自身的ARP表后，计算机若要透过网上网关连到其他计算机时，数据包将被导到C(00-55-44-33-22-11)这个MAC地址，因此攻击者可从此MAC地址截收到数据包，可篡改后再送回真正的网关，或是什么也不做，让网上无法连线。</p>
+<h5 id="5-1-2-ARP欺骗例子"><a href="#5-1-2-ARP欺骗例子" class="headerlink" title="5.1.2 ARP欺骗例子"></a>5.1.2 ARP欺骗例子</h5>   <font face="楷体">（1）攻击者聆听局域网上的MAC地址。它只要收到两台主机洪泛的ARP Request，就可以进行欺骗活动。<br>   （2）主机A、B都洪泛了ARP Request.攻击者现在有了两台主机的IP、MAC地址，开始攻击。<br>   （3）攻击者发送一个ARP Reply给主机B，把此包protocol header里的sender IP设为A的IP地址，sender mac设为攻击者自己的MAC地址。<br>   （4）主机B收到ARP Reply后，更新它的ARP表，把主机A的MAC地址（IP_A, MAC_A）改为（IP_A, MAC_C）。<br>   （5）当主机B要发送数据包给主机A时，它根据ARP表来封装数据包的Link报头，把目的MAC地址设为MAC_C，而非MAC_A。<br>   （6）当交换机收到B发送给A的数据包时，根据此包的目的MAC地址（MAC_C）而把数据包转发给攻击者C。<br>   （7）攻击者收到数据包后，可以把它存起来后再发送给A，达到偷听效果。攻击者也可以篡改数据后才发送数据包给A，造成伤害。</font>
+
+<h5 id="5-1-3-防御ARP欺骗"><a href="#5-1-3-防御ARP欺骗" class="headerlink" title="5.1.3 防御ARP欺骗"></a>5.1.3 防御ARP欺骗</h5><ul>
+<li>最理想的防制方法是网上内的每台计算机的ARP一律改用静态的方式，不过这在大型的网上是不可行的，因为需要经常更新每台计算机的ARP表。</li>
+<li>另外一种方法，例如DHCP snooping，网上设备可借由DHCP保留网上上各计算机的MAC地址，在伪造的ARP数据包发出时即可侦测到。此方式已在一些厂牌的网上设备产品所支持。</li>
+<li>有一些软件可监听网上上的ARP回应，若侦测出有不正常变动时可发送邮箱通知管理者。例如UNIX平台的Arpwatch以及Windows上的XArp v2或一些网上设备的Dynamic ARP inspection功能。</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、为什么要用ARP协议："><span class="toc-number">1.</span> <span class="toc-text">一、为什么要用ARP协议：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、ARP协议简介："><span class="toc-number">2.</span> <span class="toc-text">二、ARP协议简介：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、ARP报文结构："><span class="toc-number">3.</span> <span class="toc-text">三、ARP报文结构：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、ARP地址工作过程："><span class="toc-number">4.</span> <span class="toc-text">四、ARP地址工作过程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、ARP攻击"><span class="toc-number">5.</span> <span class="toc-text">五、ARP攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-ARP欺骗"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 ARP欺骗</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1-1-ARP欺骗原理"><span class="toc-number">5.1.1.</span> <span class="toc-text">5.1.1 ARP欺骗原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1-2-ARP欺骗例子"><span class="toc-number">5.1.2.</span> <span class="toc-text">5.1.2 ARP欺骗例子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1-3-防御ARP欺骗"><span class="toc-number">5.1.3.</span> <span class="toc-text">5.1.3 防御ARP欺骗</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
