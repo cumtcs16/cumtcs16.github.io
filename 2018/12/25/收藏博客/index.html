@@ -26,7 +26,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">RARP协议</h3>
+    <h3 class="subtitle">收藏的优秀博客文章</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -43,35 +43,19 @@
     <div class="section">
         <div class="article">
     <div class="main">
-        <h1 class="title">RARP协议</h1>
+        <h1 class="title">收藏的优秀博客文章</h1>
         <div class="stuff">
-            <span>十二月 24, 2018</span>
+            <span>十二月 25, 2018</span>
             
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/综合/">综合</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/转载/">转载</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <h4 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h4><p>反向地址转换协议就是将局域网中某个主机的物理地址转换为IP地址，比如局域网中有一台主机只知道物理地址而不知道IP地址，那么可以通过RARP协议发出征求自身IP地址的广播请求，然后由RARP服务器负责回答。RARP协议广泛用于获取无盘工作站的IP地址。<br>反向地址转换协议（RARP）允许局域网的物理机器从网关服务器的 ARP 表或者缓存上请求其 IP 地址。网络管理员在局域网网关路由器里创建一个表以映射物理地址（MAC）和与其对应的 IP 地址。当设置一台新的机器时，其 RARP 客户机程序需要向路由器上的 RARP 服务器请求相应的 IP 地址。假设在路由表中已经设置了一个记录， RARP 服务器将会返回 IP 地址给机器，此机器就会存储起来以便日后使用。RARP 可以使用于以太网、光纤分布式数据接口及令牌环LAN 。</p>
-<h4 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h4><ol>
-<li>给主机发送一个本地的RARP广播，在此广播包中，声明自己的MAC地址并且请求任何收到此请求的RARP服务器分配一个IP地址；</li>
-<li>本地网段上的RARP服务器收到此请求后，检查其RARP列表，查找该MAC地址对应的IP地址；</li>
-<li>如果存在，RARP服务器就给源主机发送一个响应数据包并将此IP地址提供给对方主机使用；</li>
-<li>如果不存在，RARP服务器对此不做任何的响应；</li>
-<li>源主机收到从RARP服务器的响应信息，就利用得到的IP地址进行通讯；如果一直没有收到RARP服务器的响应信息，表示初始化失败。</li>
-</ol>
-<h4 id="关于RARP协议的思考："><a href="#关于RARP协议的思考：" class="headerlink" title="关于RARP协议的思考："></a>关于RARP协议的<font color="red">思考：</font></h4><font face="楷体">今天我们接着然后往下研究，局域网在很久以前是无盘工作站的，无盘工作站是硬盘和操作系统分开的，这样由于主机上没有硬盘故不能保存IP地址信息，而MAC地址是永久存储在网卡中的，所以此时主机知道自己的MAC但不知道IP，但是要通信必须有IP地址啊，否则FTP/TFTP/SMTP等应用层协议都不能使用了，如果局域网管理员一台一台的给主机配置IP就太麻烦了，此时你可能会想到用DHCP啊，DHCP就是用于自动获取IP地址的，正确又不完全正确，正确是DHCP确实能解决这个问题，不正确是因为在很久以前DHCP是没有的（DHCP RFC文档 2131在1997年3月份才发布），那么这个问题该如何解决呢？答案就是今天探讨的RARP（RFC文档编号903，发布日期1984年6月份），通常情况下我们把RARP理解为把MAC地址映射为IP地址，如果你还套用ARP的解析流程和应用场景去分析RARP那就越想越不通了，这里说的把MAC地址映射为IP地址实际上无盘主机在开机后，网卡引导程序就不淡定了，它会通过广播的方式询问局域网所有主机，有谁知道我的IP地址啊？RARP服务器收到这个报文后就会告诉它你的IP地址是多少，这样无盘主机就有IP地址了，就可以使用FTP快乐的下载文件了，直到BOOTP的出现，什么？怎么不是DHCP，确实在1985年9月份BOOTP出现并取代了RARP协议，编号是RFC 951，然后就一直到1997年DHCP的出现。</font>
-
-<p>至此我已经列出了三种可以分配IP地址的协议了，分别是<font color="blue">RARP、BOOTP、DHCP，</font>那这三种协议有什么<font color="red">区别</font>呢？</p>
-<ul>
-<li><p>RARP的实现是在数据链路层实现的，BOOTP和DHCP的实现是在UDP传输层实现的，这仅仅是表面上的区别，那优势呢，如果没有优势BOOTP就不会取代RARP了，我的理解是RARP工作在数据链路层就需要网卡去解析协议，而随着操作系统的发展，纯软件实现的网络协议内核比纯硬件网卡解析更加实惠，而BOOTP就是使用网络协议内核去解析的，欢迎大家拍砖共同探讨。</p>
-</li>
-<li><p>RARP服务器只能提供简单的地址分配，而且这些IP地址和MAC地址必须要提前在RARP服务器上配置好，而BOOTP和DHCP有更多复杂的功能，比如租约周期、地址池、网关和DNS服务器等，在这个年代你没有DNS只有IP也是不能上网的，除非你手动指定DNS服务器。另外BOOTP在获取到IP地址后客户端还会通过TFTP或者FTP协议去网络服务器上下载一个引导镜像文件。</p>
-</li>
-<li><p>DHCP是BOOTP的升级版本，增加了Option配置选项，而且DHCP可以分配之前已经分过的但当前没有使用的IP地址，提高了IP地址利用率。而BOOTP的IP地址和MAC地址的映射是事先配置好不能动态改变的。</p>
-</li>
-</ul>
-
+            <h3 id="JAVA相关"><a href="#JAVA相关" class="headerlink" title="JAVA相关"></a>JAVA相关</h3><h4 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h4><h4 id="JAVA多线程和并发"><a href="#JAVA多线程和并发" class="headerlink" title="JAVA多线程和并发"></a>JAVA多线程和并发</h4><h4 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h4><p>1.<a href="http://www.cnblogs.com/erbing/p/5805727.html" target="_blank" rel="noopener">JDBC详解</a></p>
+<h3 id="数据结构和算法"><a href="#数据结构和算法" class="headerlink" title="数据结构和算法"></a>数据结构和算法</h3><h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><h4 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h4><h4 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h4><h4 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h4><p>1.<a href="https://www.cnblogs.com/iiiiher/p/8513748.html" target="_blank" rel="noopener">完全理解ICMP协议</a><br>2.<a href="https://www.cnblogs.com/red-code/p/7132023.html" target="_blank" rel="noopener">IP协议详解</a></p>
+<h4 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h4><h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>1.<a href="https://blog.csdn.net/xu735456/article/details/54846239" target="_blank" rel="noopener">FTP协议详解</a><br>2.<a href="https://www.cnblogs.com/zxj015/p/6530766.html" target="_blank" rel="noopener">https详解</a></p>
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><h3 id="开源框架"><a href="#开源框架" class="headerlink" title="开源框架"></a>开源框架</h3><h4 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h4>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
@@ -93,7 +77,7 @@
     </div>
     
         <div class="side">
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#简介："><span class="toc-number">1.</span> <span class="toc-text">简介：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工作原理："><span class="toc-number">2.</span> <span class="toc-text">工作原理：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于RARP协议的思考："><span class="toc-number">3.</span> <span class="toc-text">关于RARP协议的思考：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA相关"><span class="toc-number">1.</span> <span class="toc-text">JAVA相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JAVA基础"><span class="toc-number">1.1.</span> <span class="toc-text">JAVA基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JAVA多线程和并发"><span class="toc-number">1.2.</span> <span class="toc-text">JAVA多线程和并发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JDBC"><span class="toc-number">1.3.</span> <span class="toc-text">JDBC</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据结构和算法"><span class="toc-number">2.</span> <span class="toc-text">数据结构和算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算机网络"><span class="toc-number">3.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#物理层"><span class="toc-number">3.1.</span> <span class="toc-text">物理层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据链路层"><span class="toc-number">3.2.</span> <span class="toc-text">数据链路层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网络层"><span class="toc-number">3.3.</span> <span class="toc-text">网络层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#传输层"><span class="toc-number">3.4.</span> <span class="toc-text">传输层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#应用层"><span class="toc-number">3.5.</span> <span class="toc-text">应用层</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作系统"><span class="toc-number">4.</span> <span class="toc-text">操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库"><span class="toc-number">5.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开源框架"><span class="toc-number">6.</span> <span class="toc-text">开源框架</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring"><span class="toc-number">6.1.</span> <span class="toc-text">Spring</span></a></li></ol></li></ol>
         </div>
     
 </div>

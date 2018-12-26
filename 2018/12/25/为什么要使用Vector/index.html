@@ -26,7 +26,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">RARP协议</h3>
+    <h3 class="subtitle">Java的Vector介绍</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -43,32 +43,29 @@
     <div class="section">
         <div class="article">
     <div class="main">
-        <h1 class="title">RARP协议</h1>
+        <h1 class="title">Java的Vector介绍</h1>
         <div class="stuff">
-            <span>十二月 24, 2018</span>
+            <span>十二月 25, 2018</span>
             
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/计算机网络/">计算机网络</a></li></ul>
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Java/">Java</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <h4 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h4><p>反向地址转换协议就是将局域网中某个主机的物理地址转换为IP地址，比如局域网中有一台主机只知道物理地址而不知道IP地址，那么可以通过RARP协议发出征求自身IP地址的广播请求，然后由RARP服务器负责回答。RARP协议广泛用于获取无盘工作站的IP地址。<br>反向地址转换协议（RARP）允许局域网的物理机器从网关服务器的 ARP 表或者缓存上请求其 IP 地址。网络管理员在局域网网关路由器里创建一个表以映射物理地址（MAC）和与其对应的 IP 地址。当设置一台新的机器时，其 RARP 客户机程序需要向路由器上的 RARP 服务器请求相应的 IP 地址。假设在路由表中已经设置了一个记录， RARP 服务器将会返回 IP 地址给机器，此机器就会存储起来以便日后使用。RARP 可以使用于以太网、光纤分布式数据接口及令牌环LAN 。</p>
-<h4 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h4><ol>
-<li>给主机发送一个本地的RARP广播，在此广播包中，声明自己的MAC地址并且请求任何收到此请求的RARP服务器分配一个IP地址；</li>
-<li>本地网段上的RARP服务器收到此请求后，检查其RARP列表，查找该MAC地址对应的IP地址；</li>
-<li>如果存在，RARP服务器就给源主机发送一个响应数据包并将此IP地址提供给对方主机使用；</li>
-<li>如果不存在，RARP服务器对此不做任何的响应；</li>
-<li>源主机收到从RARP服务器的响应信息，就利用得到的IP地址进行通讯；如果一直没有收到RARP服务器的响应信息，表示初始化失败。</li>
-</ol>
-<h4 id="关于RARP协议的思考："><a href="#关于RARP协议的思考：" class="headerlink" title="关于RARP协议的思考："></a>关于RARP协议的<font color="red">思考：</font></h4><font face="楷体">今天我们接着然后往下研究，局域网在很久以前是无盘工作站的，无盘工作站是硬盘和操作系统分开的，这样由于主机上没有硬盘故不能保存IP地址信息，而MAC地址是永久存储在网卡中的，所以此时主机知道自己的MAC但不知道IP，但是要通信必须有IP地址啊，否则FTP/TFTP/SMTP等应用层协议都不能使用了，如果局域网管理员一台一台的给主机配置IP就太麻烦了，此时你可能会想到用DHCP啊，DHCP就是用于自动获取IP地址的，正确又不完全正确，正确是DHCP确实能解决这个问题，不正确是因为在很久以前DHCP是没有的（DHCP RFC文档 2131在1997年3月份才发布），那么这个问题该如何解决呢？答案就是今天探讨的RARP（RFC文档编号903，发布日期1984年6月份），通常情况下我们把RARP理解为把MAC地址映射为IP地址，如果你还套用ARP的解析流程和应用场景去分析RARP那就越想越不通了，这里说的把MAC地址映射为IP地址实际上无盘主机在开机后，网卡引导程序就不淡定了，它会通过广播的方式询问局域网所有主机，有谁知道我的IP地址啊？RARP服务器收到这个报文后就会告诉它你的IP地址是多少，这样无盘主机就有IP地址了，就可以使用FTP快乐的下载文件了，直到BOOTP的出现，什么？怎么不是DHCP，确实在1985年9月份BOOTP出现并取代了RARP协议，编号是RFC 951，然后就一直到1997年DHCP的出现。</font>
-
-<p>至此我已经列出了三种可以分配IP地址的协议了，分别是<font color="blue">RARP、BOOTP、DHCP，</font>那这三种协议有什么<font color="red">区别</font>呢？</p>
+            <h4 id="为什么要使用Vector"><a href="#为什么要使用Vector" class="headerlink" title="为什么要使用Vector"></a>为什么要使用Vector</h4><p>在Java语言中没有指针的概念，但如果正确灵活地使用指针又确实可以大大提高程序的质量。比如在c,c++中所谓的“动态数组”一般都由指针来实现。为了弥补这个缺点，Java提供了丰富的类库来方便编程者使用，vector类(向量类)便是其中之一。事实上，灵活使用数组也可以完成向量类的功能，但向量类中提供大量的方法大大方便了用户的使用。</p>
+<h4 id="Vector简介"><a href="#Vector简介" class="headerlink" title="Vector简介"></a>Vector简介</h4><p><font color="red">Vector：</font>即<font color="DeepPink"><strong>自动增长</strong></font>的<font color="DeepPink"><strong>对象数组</strong></font>。 </p>
+<p><font color="DeepPink"><strong>自动增长</strong></font>:即不需预先选定向量的容量。</p>
+<p><font color="DeepPink"><strong>对象数组</strong></font>：创建了一个向量类的对象后，可以往其中随意插入<font color="red">不同类的对象</font>，即不需顾及类型。</p>
+<h4 id="Vector的构造方法"><a href="#Vector的构造方法" class="headerlink" title="Vector的构造方法"></a>Vector的构造方法</h4><p>public vector()<br>public vector(int initialcapacity,int capacityIncrement)<br>public vector(int initialcapacity)</p>
 <ul>
-<li><p>RARP的实现是在数据链路层实现的，BOOTP和DHCP的实现是在UDP传输层实现的，这仅仅是表面上的区别，那优势呢，如果没有优势BOOTP就不会取代RARP了，我的理解是RARP工作在数据链路层就需要网卡去解析协议，而随着操作系统的发展，纯软件实现的网络协议内核比纯硬件网卡解析更加实惠，而BOOTP就是使用网络协议内核去解析的，欢迎大家拍砖共同探讨。</p>
+<li><p>使用第一种方法系统会自动对向量进行管理</p>
 </li>
-<li><p>RARP服务器只能提供简单的地址分配，而且这些IP地址和MAC地址必须要提前在RARP服务器上配置好，而BOOTP和DHCP有更多复杂的功能，比如租约周期、地址池、网关和DNS服务器等，在这个年代你没有DNS只有IP也是不能上网的，除非你手动指定DNS服务器。另外BOOTP在获取到IP地址后客户端还会通过TFTP或者FTP协议去网络服务器上下载一个引导镜像文件。</p>
+<li><p>若使用后两种方法。则系统将根据参数，initialcapacity设定向量对象的容量（即向量对象可存储数据的大小），当真正存放的数据个数超过容量时。系统会扩充向量对象存储容量。</p>
 </li>
-<li><p>DHCP是BOOTP的升级版本，增加了Option配置选项，而且DHCP可以分配之前已经分过的但当前没有使用的IP地址，提高了IP地址利用率。而BOOTP的IP地址和MAC地址的映射是事先配置好不能动态改变的。</p>
+<li><p>参数<font color="DeepPink">capacityincrement</font>给定了<font color="red">每次扩充的扩充值</font>。当<font color="DeepPink">capacityincrement为0</font>的时候，则<font color="red">每次扩充一倍</font>，利用这个功能可以优化存储。在Vector类中提供了各种方法方便用户的使用。</p>
+<h4 id="Vector的功能函数"><a href="#Vector的功能函数" class="headerlink" title="Vector的功能函数"></a>Vector的功能函数</h4><p><font color="DeepPink"><strong>插入功能</strong></font>：<br>（1）public final synchronized void adddElement(Object obj)<br>将obj插入向量的尾部。obj可以是任何类型的对象。对同一个向量对象，亦可以在其中插入不同类的对象。但插入的应是对象而不是数值，所以插入数值时要注意将数组转换成相应的对象。<br>例如：要插入整数1时，不要直接调用v1.addElement(1),正确的方法为：<br>Vector v1 = new Vector();<br>Integer integer1 = new Integer(1);<br>v1.addElement(integer1);<br>(2)public final synchronized void setElementAt(Object obj,int index)<br>将index处的对象设置成obj，原来的对象将被覆盖。<br>(3)public final synchronized void insertElementAt(Object obj,int index)<br>在index指定的位置插入obj，原来对象以及此后的对象依次往后顺延。</p>
+<p><font color="DeepPink"><strong>删除功能</strong></font>：<br>(1)public final synchronized void removeElement(Object obj)<br>从向量中删除obj,若有多个存在，则从向量头开始试，删除找到的第一个与obj相同的向量成员。<br>(2)public final synchronized void removeAllElement();<br>删除向量所有的对象<br>(3)public fianl synchronized void removeElementAt(int index)<br>删除index所指的地方的对象</p>
+<p><font color="DeepPink"><strong>查询功能</strong></font>：<br>(1)public final int indexOf(Object obj)<br>从向量头开始搜索obj,返回所遇到的第一个obj对应的下标，若不存在此obj,返回-1.<br>(2)public final synchronized int indexOf(Object obj,int index)<br>从index所表示的下标处开始搜索obj.<br>(3)public final int lastindexOf(Object obj)<br>从向量尾部开始逆向搜索obj.<br>(4)public final synchornized int lastIndex(Object obj,int index)<br>从index所表示的下标处由尾至头逆向搜索obj.<br>(5)public final synchornized firstElement()<br>获取向量对象中的首个obj<br>(6)public final synchornized Object lastElement()<br>获取向量对象的最后一个obj</p>
 </li>
 </ul>
 
@@ -93,7 +90,7 @@
     </div>
     
         <div class="side">
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#简介："><span class="toc-number">1.</span> <span class="toc-text">简介：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工作原理："><span class="toc-number">2.</span> <span class="toc-text">工作原理：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于RARP协议的思考："><span class="toc-number">3.</span> <span class="toc-text">关于RARP协议的思考：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么要使用Vector"><span class="toc-number">1.</span> <span class="toc-text">为什么要使用Vector</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vector简介"><span class="toc-number">2.</span> <span class="toc-text">Vector简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vector的构造方法"><span class="toc-number">3.</span> <span class="toc-text">Vector的构造方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vector的功能函数"><span class="toc-number">4.</span> <span class="toc-text">Vector的功能函数</span></a></li></ol>
         </div>
     
 </div>
