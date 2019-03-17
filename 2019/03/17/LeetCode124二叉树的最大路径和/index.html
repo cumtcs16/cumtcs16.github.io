@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>电脑必备软件清单及安装方法</title>
+	<title>LeetCode124二叉树的最大路径和</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,14 +54,14 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《电脑必备软件清单及安装方法》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《LeetCode124二叉树的最大路径和》</p>
 			
 		
 	
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		12/27/2018 
+		3/17/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -160,8 +160,8 @@
 					
 					
 	
-		<a href="/2018/12/19/电脑必备软件清单/" itemprop="url">		
-			电脑必备软件清单及安装方法		
+		<a href="/2019/03/17/LeetCode124二叉树的最大路径和/" itemprop="url">		
+			LeetCode124二叉树的最大路径和		
 		</a>
 	
 
@@ -170,15 +170,24 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/12/19/电脑必备软件清单/" itemprop="url">
-	<time datetime="2018-12-19T14:07:17.761Z" itemprop="datePublished">
-  		2018-12-19
+						<a href="/2019/03/17/LeetCode124二叉树的最大路径和/" itemprop="url">
+	<time datetime="2019-03-17T13:03:30.000Z" itemprop="datePublished">
+  		2019-03-17
   </time>
 </a>    
 &nbsp;
 					</span>
 					
 					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#leetcode" title="leetcode" rel="1">leetcode</a>&nbsp;
+							
+								<a href="#算法" title="算法" rel="1">算法</a>&nbsp;
+							
+								<a href="#数据结构" title="数据结构" rel="2">数据结构</a>&nbsp;
+													 											
 						
 					</span>
 				</p>
@@ -187,32 +196,47 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<p>欢迎你来到小马哥的博客: <a href="https://cumtcs16.github.io">https://cumtcs16.github.io</a></p>
-<h3 id="篇一：编程工具篇"><a href="#篇一：编程工具篇" class="headerlink" title="篇一：编程工具篇"></a>篇一：编程工具篇</h3><p><strong>1.JAVA：</strong></p>
-<ul>
-<li><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">JDK下载</a></li>
-<li><a href="https://www.oracle.com/technetwork/java/javase/documentation/jdk8-doc-downloads-2133158.html" target="_blank" rel="noopener">JDK文档下载</a></li>
-<li><a href="https://www.eclipse.org/downloads/" target="_blank" rel="noopener">eclipse下载</a></li>
-<li><a href="https://www.eclipse.org/babel/downloads.php" target="_blank" rel="noopener">eclipse语言包下载</a></li>
-<li><a href="https://www.eclipse.org/windowbuilder/download.php" target="_blank" rel="noopener">WindowsBuilder下载（JAVA可视化编程工具）</a></li>
-<li><a href="https://blog.csdn.net/u011035640/article/details/82560803" target="_blank" rel="noopener">JDBC+MySQL</a></li>
-<li><a href="https://blog.csdn.net/u011035640/article/details/83790011" target="_blank" rel="noopener">Spring下载及配置</a></li>
-</ul>
-<p><strong>2.C/C++/C#：</strong></p>
-<ul>
-<li><a href="https://sourceforge.net/projects/orwelldevcpp/" target="_blank" rel="noopener">Dev下载</a></li>
-<li><a href="https://visualstudio.microsoft.com/zh-hans/downloads/" target="_blank" rel="noopener">VS2017下载</a>建议选择社区版</li>
-</ul>
-<p><strong>3.微信开发：</strong></p>
-<ul>
-<li><a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html" target="_blank" rel="noopener">小程序开发者工具下载</a></li>
-<li><a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html" target="_blank" rel="noopener">小游戏开发者工具下载</a></li>
-</ul>
-<h3 id="篇二：办公工具篇"><a href="#篇二：办公工具篇" class="headerlink" title="篇二：办公工具篇"></a>篇二：办公工具篇</h3><ul>
-<li><a href="https://get.adobe.com/cn/reader/" target="_blank" rel="noopener">Adobe Reader（PDF阅读器)</a></li>
-<li>PDF转Word工具: <a href="https://pan.baidu.com/s/1T4-x90-szRD6U-PZwUUNHw" target="_blank" rel="noopener">https://pan.baidu.com/s/1T4-x90-szRD6U-PZwUUNHw</a> 提取码: pdfx</li>
-<li><a href="https://products.office.com/zh-cn/previous-versions/microsoft-visio-2013?rtc=1" target="_blank" rel="noopener">Viso(画流程图)</a></li>
-</ul>
+						<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个非空二叉树，返回其最大路径和。</p>
+<p>本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。</p>
+<p>示例 1:</p>
+<p>输入: [1,2,3]</p>
+<p>​       1</p>
+<p>​      / \</p>
+<p>​     2   3</p>
+<p>输出: 6</p>
+<p>示例 2:</p>
+<p>输入: [-10,9,20,null,null,15,7]</p>
+<p>   -10</p>
+<p>   / \</p>
+<p>  9  20</p>
+<p>​    /  \</p>
+<p>   15   7</p>
+<p>输出: 42</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><font face="楷体">递归，每个时刻判断左子树和右子树的值，如果子树的值大于0，则加上子树的值，同时利用全部变量maxpath记录递归过程中的最大值。<br><br>先定义一个全局变量来存储计算过程中的最大路径。<br><br>写一个函数nowToother(TreeNode* node)<br><br>函数有两个作用：<br><br>1. 返回从node出发到另一节点的最大路径<br><br>2. 更新最大路径（因为函数用用了全局变量maxpath）<br><br>（1） node为起点，终点在node的右子树（lmaxpath&lt;0, rmaxpath&gt;0）<br><br>（2）node为起点，终点在node的左子树（lmaxpath&gt;0, rmaxpath&lt;0）<br><br>（3）起点和终点分别在左右子树，但经过node （lmaxpath&lt;0, rmaxpath&gt;0）<br><br>（4）Node即为起点又是终点（lmaxpath&lt;0, rmaxpath&lt;0）</font>
+
+<p>函数原理：</p>
+<p><img src="https://i.loli.net/2019/03/17/5c8e4667610da.png" alt=""></p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p><code>class Solution {
+public:
+​    int maxpath=INT_MIN;//全局变量，用于存储节点路径的最大值
+​    int nowToother(TreeNode* node){//计算从node节点出发到其他节点的最大值
+​        if(node==NULL)return 0;
+​        int temp=node-&gt;val;//存储node（出发点的值）
+​        int lmaxpath=nowToother(node-&gt;left);//计算出发点node左孩子的从左孩子出发到其他节点的最大值
+​        int rmaxpath=nowToother(node-&gt;right);//右
+​        if(lmaxpath&gt;0)temp+=lmaxpath;//如果从左孩子出发到其他节点的最大值大于零则把左孩子和node连起来
+​        if(rmaxpath&gt;0)temp+=rmaxpath;//同理也把右边连起来
+​        //注意如果，左右都被连了起来，那么node就不是出发点了
+​        if(maxpath&lt;temp)maxpath=temp;//更新当前最大路径
+​        //用于计算从node出发到另一节点的最大值
+​        return max(node-&gt;val,max(node-&gt;val+lmaxpath,node-&gt;val+rmaxpath));
+​    }
+​    int maxPathSum(TreeNode* root) {
+​        if(root==NULL)return 0;
+​        nowToother(root);
+​        return maxpath;
+​    }
+};</code></p>
 
 					
 				</div>
@@ -221,13 +245,13 @@
 
 		<ul class="am-pagination">
     
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/12/22/UDP详解/" title="UDP协议">
-      		&laquo; 上一篇
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/03/16/Mybatis之动态SQL/" title="Mybatis之动态SQL">
+			下一篇 &raquo;
 		</a>
 		</li>
-	
-	
+	 
  </ul>
         
 
@@ -315,7 +339,7 @@
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#篇一：编程工具篇"><span class="post-toc-text">篇一：编程工具篇</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#篇二：办公工具篇"><span class="post-toc-text">篇二：办公工具篇</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目描述"><span class="post-toc-text">题目描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解题思路"><span class="post-toc-text">解题思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#源代码"><span class="post-toc-text">源代码</span></a></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
@@ -353,7 +377,7 @@
 	<div class="blog-text-center">
 		<div class="theme-annie-copyright">
 			
-				&copy; 2017 - 2018, content by xiaoma. All Rights Reserved.			       	
+				&copy; 2017 - 2019, content by xiaoma. All Rights Reserved.			       	
 			
 		</div>
 	</div>

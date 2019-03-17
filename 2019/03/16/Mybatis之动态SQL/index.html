@@ -1,0 +1,533 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+
+	<!DOCTYPE html>
+	<html>
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<title>Mybatis之动态SQL</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="apple-mobile-web-app-title" content="Amaze UI">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="author" content="xiaoma">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+   	<!-- css -->
+	<link rel="stylesheet" href="/css/style.css">
+
+	<!-- favicon -->
+	<link href="/img/favicon.ico" rel="Shortcut Icon" type="image/ico">
+	
+	<!-- font-awesome -->
+	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+	<body>	
+		<!--Preloader-->
+<div id="preloader">
+	<div id="status">
+		<img alt="PRELOADER" src="/img/logo.png">
+	</div>
+</div>
+<!--Preloader end-->
+
+<!-- header -->
+
+	<header id="header-bg-1" style="background-image: url( /img/1.jpg );">	
+
+	
+		<div id="cd-logo"><a href="/"><img src="/img/logo.png" alt="Logo"></a></div>
+	
+	
+	<!-- motto or description -->
+		
+ 		<p class="motto"></p>
+	
+	
+	<!-- current page name or title -->
+	
+		
+		
+			
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Mybatis之动态SQL》</p>
+			
+		
+	
+	
+	<!-- others: such as change-bg, time... -->
+	<p class="page-name-other">
+		3/17/2019 
+		<style type="text/css">
+	header:after {
+		content: '';
+		position: relative;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background: #222222;
+		opacity: .5;
+		z-index: -1;
+	}
+	
+	.change-header-bg{
+		font-style: normal;
+	}
+	.change-header-bg i{
+		text-align: center;
+		cursor: pointer;
+		pointer-events: bounding-box;
+	}
+	@media(max-width:512px) {
+		.change-header-bg {
+			display: none;
+			visibility: hidden;
+		}
+	}
+	
+</style>
+
+<script type="text/javascript">
+	function changeHeaderBg(){
+		var random_bg = Math.floor(Math.random() * 109 + 1);
+		var bg = 'url(https://XXX-youname-XXX.github.io/Random-img/' + random_bg + '.jpg)';
+		$("#header-bg-2").css("background-image", bg);
+	}
+</script>
+
+<span class="change-header-bg">
+	——&nbsp;<i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>	
+</span>
+	</p>		
+</header>
+
+<!-- nav -->
+<div id="cd-nav">
+	<a href="#0" title="menu" class="cd-nav-trigger"><span></span></a>
+
+	<nav id="cd-main-nav">
+		<ul>
+			
+      		<li class="fa fa-/">
+           		<a href="/" title="主页">主页</a>	
+      		</li>
+    		
+      		<li class="fa fa-/archives">
+           		<a href="/archives" title="归档">归档</a>	
+      		</li>
+    		
+      		<li class="fa fa-/categories">
+           		<a href="/categories" title="分类">分类</a>	
+      		</li>
+    		
+      		<li class="fa fa-/tags">
+           		<a href="/tags" title="标签">标签</a>	
+      		</li>
+    		
+      		<li class="fa fa-/about">
+           		<a href="/about" title="关于">关于</a>	
+      		</li>
+    		
+      		<li class="fa fa-/gallery">
+           		<a href="/gallery" title="相册">相册</a>	
+      		</li>
+    		
+    		
+        	
+		</ul>
+	</nav>
+</div>
+
+		<!--main-->
+		<main> 
+		<div class="page-container">
+		<!-- content srart -->
+<div class="am-g am-g-fixed blog-fixed blog-content">
+	<div class="am-u-md-8 am-u-sm-12">
+
+		<article class="am-article blog-article-p">
+
+			<div class="am-article-hd">
+				
+
+
+				<h1 class="am-article-title blog-text-center">
+					
+					
+	
+		<a href="/2019/03/16/Mybatis之动态SQL/" itemprop="url">		
+			Mybatis之动态SQL		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2019/03/16/Mybatis之动态SQL/" itemprop="url">
+	<time datetime="2019-03-16T07:38:00.000Z" itemprop="datePublished">
+  		2019-03-16
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#SSM框架" title="SSM框架" rel="1">SSM框架</a>&nbsp;
+							
+								<a href="#MyBatis" title="MyBatis" rel="1">MyBatis</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h2 id="为什么要使用动态SQL？"><a href="#为什么要使用动态SQL？" class="headerlink" title="为什么要使用动态SQL？"></a>为什么要使用动态SQL？</h2><p>开发人员在使用JDBC或者其他类似的框架进行数据库开发时，通常都要根据需求去手动拼装SQL，这是一个非常麻烦且痛苦的工作。而MyBatis的动态SQL功能刚好能解决这一问题。过 if, choose, when,<br>otherwise, trim, where, set, foreach等标签，可组合成非常灵活的SQL语句，从而在提高 SQL 语句的准确性的同时，也大大提高了开发人员的效率。</p>
+<h2 id="动态SQL标签大全："><a href="#动态SQL标签大全：" class="headerlink" title="动态SQL标签大全："></a>动态SQL标签大全：</h2><p><img src="https://i.loli.net/2019/03/16/5c8cb422db6b9.jpg" alt=""></p>
+<h2 id="各个标签详解："><a href="#各个标签详解：" class="headerlink" title="各个标签详解："></a>各个标签详解：</h2><h3 id="if标签"><a href="#if标签" class="headerlink" title="if标签"></a>if标签</h3><p><code>&lt;select id=&quot;queryByIdAndTitle&quot;
+     resultType=&quot;Blog&quot;&gt;
+  SELECT * FROM BLOG 
+  WHERE 1=1 
+  &lt;if test=&quot;id!= null and title!=null&quot;&gt;
+    AND id=#{id} and title=#{title}
+  &lt;/if&gt;
+&lt;/select&gt;</code></p>
+<p>注：if标签一般用于非空验证，如上例，若id为空，if标签里的代码，将不会执行，反之，则会执行。</p>
+<p>问题：如果不用where 1=1直接用where将会出现SELECT * FROM BLOG  WHERE AND id=#{id} and title=#{title}的错误SQL语句。</p>
+<h3 id="choose-when、otherwise-标签"><a href="#choose-when、otherwise-标签" class="headerlink" title="choose(when、otherwise)标签"></a>choose(when、otherwise)标签</h3><p>当遇到多个条件选择一个成立的条件时，if标签显然不合适，此时最合适的是类似于编程语言中分switch…case…而choose(when、otherwise)标签就类似于switch…case…的功能。</p>
+<p><code>&lt;select id=&quot;queryBy&quot;
+     resultType=&quot;Blog&quot;&gt;
+  SELECT * FROM BLOG WHERE 1=1
+  &lt;choose&gt;
+    &lt;when test=&quot;title != null&quot;&gt;
+      AND title like #{title}
+    &lt;/when&gt;
+    &lt;when test=&quot;name != null&quot;&gt;
+      AND name like #{name}
+    &lt;/when&gt;
+    &lt;otherwise&gt;
+      AND id= 1
+    &lt;/otherwise&gt;
+  &lt;/choose&gt;
+&lt;/select&gt;</code></p>
+<p>注：choose(when,otherwise)标签相当于switch(case,default) ，如上例，若title 不为空，<font color="red">只</font>执行第一个when标签里的代码，若title 为空，name不为空，<font color="red">只</font>会执行第二个when标签里的代码，两个都为空，默认执行otherwise标签里面的代码。</p>
+<h3 id="where，trim，set标签"><a href="#where，trim，set标签" class="headerlink" title="where，trim，set标签"></a>where，trim，set标签</h3><p><code>&lt;select id=&quot;queryBy&quot; resultType=&quot;com.scme.pojo.User&quot; parameterType=&quot;com.scme.pojo.User&quot;&gt;
+                 select * from user 
+                 &lt;where&gt;
+                         &lt;if test=&quot;username!=null and password!=null&quot;&gt;
+                             and username=#{username} and password=#{password}
+                         &lt;/if&gt;
+                 &lt;/where&gt;
+&lt;/select&gt;</code></p>
+<p>注：假设上例传入的username，password不为空，代码就可以运行成功！但朋友们可能有疑问了，实际上执行的sql语句是什么呢？其实，sql为：select * from user</p>
+<p> where username=? and password=?  朋友们是否发现，<font color="red">where标签代替了sql中where关键字</font>，但if中的and不见了。其实<font color="red">where标签可以自动去除是“AND”或“OR”开头的sql中的“AND”或“OR”关键字</font>。</p>
+<p>如果 where 元素没有按正常套路出牌，我们还是可以通过自定义 trim 元素来定制sql,实现where标签的效果。代码如下：</p>
+<p><code>&lt;select id=&quot;queryBy&quot; resultType=&quot;com.scme.pojo.User&quot; parameterType=&quot;com.scme.pojo.User&quot;&gt;
+                 select * from user 
+                 &lt;trim prefix=&quot;WHERE&quot; prefixOverrides=&quot;AND |OR &quot;&gt;
+                          &lt;if test=&quot;username!=null and password!=null&quot;&gt;
+                             and username=#{username} and password=#{password}
+                         &lt;/if&gt;
+                &lt;/trim&gt;
+                 &lt;!-- 效果同上
+　　　　　　　　　　&lt;where&gt;
+                         &lt;if test=&quot;username!=null and password!=null&quot;&gt;
+                             and username=#{username} and password=#{password}
+                         &lt;/if&gt;
+                 &lt;/where&gt; --&gt;
+         &lt;/select&gt;</code></p>
+<p>set标签:</p>
+<p><code>&lt;update id=&quot;updateUser&quot; parameterType=&quot;com.scme.pojo.User&quot;&gt;
+                 update user 
+                 &lt;set&gt;
+                     &lt;if test=&quot;username!=null&quot;&gt;
+                             username=#{username}
+                     &lt;/if&gt;
+                 &lt;/set&gt;
+                 &lt;where&gt; 
+                     &lt;if test=&quot;id!=null&quot;&gt;
+                             id=#{id}
+                     &lt;/if&gt;
+                 &lt;/where&gt;
+         &lt;/update&gt;</code></p>
+<p>注：set标签功能和where标签差不多，set标签代替了sql中set关键字,set标签可以自动去除sql末尾的多余的“，”</p>
+<p><code>&lt; update id=&quot;updateUser&quot; parameterType=&quot;com.scme.pojo.User&quot;&gt;
+                 update user 
+ 　　　　　　　　&lt; trim prefix=&quot;set&quot; prefixOverrides=&quot;,&quot;&gt;
+　　　　　　　　　　　　　　&lt; if test=&quot;username!=null&quot;&gt; username=#{username} &lt; /if&gt; 
+　　　　　　　　&lt; /trim&gt;
+ 　　　　　　　　&lt; where&gt; 
+　　　　　　　　　　　　&lt; if test=&quot;id!=null&quot;&gt; id=#{id} &lt; /if&gt; 　　　　　　　　
+　　　　　　　　&lt; /where&gt;
+ &lt; /update&gt;</code></p>
+<p>同理，trim标签也可以实现set标签的功能</p>
+<h3 id="foreach-标签：foreach标签实现批量删除"><a href="#foreach-标签：foreach标签实现批量删除" class="headerlink" title="foreach 标签：foreach标签实现批量删除"></a>foreach 标签：foreach标签实现批量删除</h3><p><img src="https://i.loli.net/2019/03/16/5c8cb3f4193a7.png" alt=""></p>
+<p>注：foreach标签可迭代任何对象（如列表、集合等）和任何的字典或者数组对象传递给foreach作为集合参数，<font color="orange">当使用可迭代对象或者数组时，index是当前迭代的次数，item的值是本次迭代获取的元素。</font><font color="blue">当使用字典（或者Map.Entry对象的集合）时，index是键，item是值。</font>collection标签可以填（’list’,’array’,’map’）。</p>
+<p><strong>foreach</strong>元素的属性主要有 item，index，collection，open，separator，close。</p>
+<p><strong>item</strong>表示集合中每一个元素进行迭代时的别名；</p>
+<p><strong>index</strong>指 定一个名字，用于表示在迭代过程中，每次迭代到的位置；</p>
+<p><strong>open</strong>表示该语句以什么开始，</p>
+<p><strong>separator</strong>表示在每次进行迭代之间以什么符号作为分隔符；</p>
+<p><strong>close</strong>表示以什么结束。</p>
+
+					
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+    	<li class="am-pagination-prev">
+   		<a class="pull-left" href="/2019/03/17/LeetCode124二叉树的最大路径和/" title="LeetCode124二叉树的最大路径和">
+      		&laquo; 上一篇
+		</a>
+		</li>
+	
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/02/28/青书JAVA笔试题/" title="青书JAVA笔试题">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
+</div>
+
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么要使用动态SQL？"><span class="post-toc-text">为什么要使用动态SQL？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态SQL标签大全："><span class="post-toc-text">动态SQL标签大全：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#各个标签详解："><span class="post-toc-text">各个标签详解：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#if标签"><span class="post-toc-text">if标签</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#choose-when、otherwise-标签"><span class="post-toc-text">choose(when、otherwise)标签</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#where，trim，set标签"><span class="post-toc-text">where，trim，set标签</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#foreach-标签：foreach标签实现批量删除"><span class="post-toc-text">foreach 标签：foreach标签实现批量删除</span></a></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
+		</div>
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="blog-text-center">
+		<div class="theme-annie-social">
+				
+				
+					<a href="http://github.com/" title="Github" target="_blank"><i class="fa fa-github"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="Weibo" target="_blank"><i class="fa fa-weibo"></i>&nbsp;</a>
+				
+				
+					<a href="http://github.com/" title="Email" target="_blank"><i class="fa fa-envelope-o"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="QQ" target="_blank"><i class="fa fa-qq"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="Twitter" target="_blank"><i class="fa fa-twitter"></i>&nbsp;</a>
+						
+				
+		</div>
+	</div>
+
+	<div class="blog-text-center">
+		<div class="theme-annie-copyright">
+			
+				&copy; 2017 - 2019, content by xiaoma. All Rights Reserved.			       	
+			
+		</div>
+	</div>
+
+	<div class="blog-text-center">
+		<div class="theme-annie-copyright">
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.		
+		</div>
+	</div>
+</footer>
+		<!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script> -->
+
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+
+<style>
+	.motto {
+		color: #000000;
+		font-size: 20px;
+		margin: 100px 25% 0;
+		width: 50%;
+		line-height: 1.4;
+		font-family:"KaiTi", "STXingkai", "Source Sans Pro", "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
+		text-align: center;
+	}
+	@media(max-width: 890px) {
+		.motto {	
+			margin: 100px 10% 0;
+			width: 80%;
+		}
+	}
+	@media(max-width: 890px) {
+		.motto {
+			margin: 100px 5% 0;
+			width: 90%;
+		}
+	}
+</style>
+
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
+
+
+
+
+
+	<script type="text/javascript" src="/js/love.js"></script>
+
+
+
+	<script type="text/javascript" src="/js/toc.js"></script>
+
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript">
+	//generate a random img that pre_name 'from 0 to 110'
+	var random_bg = Math.floor(Math.random() * 109 + 1);
+
+	//var bg = 'url(/img/random/' + random_bg + '.jpg)';		
+	var bg = 'url(https://XXX-youname-XXX.github.io/Random-img/' + random_bg + '.jpg)';
+
+	$("#header-bg-2").css("background-image", bg);
+</script>
+		
+		<!--back to top-->
+        <style type="text/css">
+	#totop {
+		background: white;
+		border-radius: 50%;
+		position: fixed;
+		right: 5.4%;
+		bottom: 80px;
+		cursor: pointer;
+	}
+	
+	#totop a {
+		color: #474747;
+		background-color: transparent;
+		padding: 10px;
+		text-decoration: none;
+	}
+	
+	@media(max-width:512px) {
+		#totop {
+			display: none;
+			visibility: hidden;
+		}
+	}
+</style>
+
+
+	<div id="totop">
+  		<a href="javascript:;" class="fa fa-arrow-up"></a>
+	</div>
+
+	<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+	</html>
+
