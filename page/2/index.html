@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>小马的博客</title>
+	<title>A solid programmer</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		3/17/2019 
+		3/23/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -95,7 +95,7 @@
 <script type="text/javascript">
 	function changeHeaderBg(){
 		var random_bg = Math.floor(Math.random() * 109 + 1);
-		var bg = 'url(https://XXX-youname-XXX.github.io/Random-img/' + random_bg + '.jpg)';
+		var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
 		$("#header-bg-2").css("background-image", bg);
 	}
 </script>
@@ -151,6 +151,51 @@
 <div class="am-g am-g-fixed blog-fixed">
 	<div class="am-u-md-12 am-u-sm-12">
 
+		
+			<article class="am-g blog-entry-article">
+
+				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
+					<img src="/coverimg/7.jpg" class="am-u-sm-12">
+				</div>	
+
+				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
+					<span class="theme-annie-post-date">
+						<a href="/2018/12/25/error2059/" itemprop="url">
+	<time datetime="2018-12-24T21:01:59.000Z" itemprop="datePublished">
+  		2018-12-25
+  </time>
+</a>    
+
+					</span>
+					<span class="theme-annie-post-title">
+						
+	
+		<a href="/2018/12/25/error2059/" itemprop="url">		
+			Navicat连接MySQL 8出现2059 - authentication plugin &#39;caching_sha2_password&#39;的解决办法		
+		</a>
+	
+
+					</span>
+					
+					
+						<p>
+							
+								原因进入控制台，执行如下命令：12mysql -u root -p;select host,user,plugin,authentication_string from mysql.user;
+备注：host为 % 表示不限制ip。localhost表示本机使用。plugin一列中，非mysql_native_password 则需要修改密码。Navicat不支持新版MySQL的caching_s	
+							  
+						</p> 
+					
+
+					
+						<span class="continue-read">      	
+							<a href="/2018/12/25/error2059/" class="pull-right">
+								展开全文
+							</a>		
+						</span>
+					         		
+				</div>
+		
+			</article>
 		
 			<article class="am-g blog-entry-article">
 
@@ -526,7 +571,7 @@
 	var random_bg = Math.floor(Math.random() * 109 + 1);
 
 	//var bg = 'url(/img/random/' + random_bg + '.jpg)';		
-	var bg = 'url(https://XXX-youname-XXX.github.io/Random-img/' + random_bg + '.jpg)';
+	var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
 
 	$("#header-bg-2").css("background-image", bg);
 </script>

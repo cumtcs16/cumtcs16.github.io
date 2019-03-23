@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>小马的博客</title>
+	<title>A solid programmer</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		3/17/2019 
+		3/23/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -95,7 +95,7 @@
 <script type="text/javascript">
 	function changeHeaderBg(){
 		var random_bg = Math.floor(Math.random() * 109 + 1);
-		var bg = 'url(https://XXX-youname-XXX.github.io/Random-img/' + random_bg + '.jpg)';
+		var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
 		$("#header-bg-2").css("background-image", bg);
 	}
 </script>
@@ -151,6 +151,61 @@
 <div class="am-g am-g-fixed blog-fixed">
 	<div class="am-u-md-12 am-u-sm-12">
 
+		
+			<article class="am-g blog-entry-article">
+
+				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
+					<img src="/img/cart_cover.jpg" class="am-u-sm-12">
+				</div>	
+
+				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
+					<span class="theme-annie-post-date">
+						<a href="/2019/03/20/JAVA线程池详解/" itemprop="url">
+	<time datetime="2019-03-20T01:26:45.000Z" itemprop="datePublished">
+  		2019-03-20
+  </time>
+</a>    
+
+					</span>
+					<span class="theme-annie-post-title">
+						
+	
+		<a href="/2019/03/20/JAVA线程池详解/" itemprop="url">		
+			JAVA线程池详解		
+		</a>
+	
+
+					</span>
+					
+					
+						<p>
+							
+								为什么要用线程池？不用线程池的缺陷若采用”为每个任务分配一个线程”的方式会存在一些缺陷，尤其是当需要创建大量线程时：
+
+线程生命周期的开销非常高
+
+资源消耗
+
+稳定性
+
+
+用线程池的好处任务是一组逻辑工作单元，线程则是使任务异步执行的机制。当存在大量并发任务时，创建、销毁线程需要很大的开销，运用线程池可以大大减小开销
+线程池框架
+一、Executor 接口简介Executor接口是Executor	
+							  
+						</p> 
+					
+
+					
+						<span class="continue-read">      	
+							<a href="/2019/03/20/JAVA线程池详解/" class="pull-right">
+								展开全文
+							</a>		
+						</span>
+					         		
+				</div>
+		
+			</article>
 		
 			<article class="am-g blog-entry-article">
 
@@ -574,11 +629,12 @@ Vector简介Vector：即自动增长的对
 					
 						<p>
 							
-								JAVA相关JAVA基础JAVA多线程和并发JDBC1.JDBC详解
-JAVA Web1.Socket
-数据结构和算法计算机网络物理层数据链路层网络层1.完全理解ICMP协议2.IP协议详解
-传输层应用层1.FTP协议详解2.https详解3.http之GET与POST详解
-操作系统数据库MySQL1.MySQL索引原理及查询优化（注意，文章中说的b+树其实是b树。）2.MySQL数据库八大优化方	
+								JAVA相关JAVA基础JAVA多线程和并发
+Callable和FutureJDBC1.JDBC详解JAVA Web1.Socket
+
+数据结构和算法排序1.八大排序总结2.快速排序3.希尔排序：增量分组+直接插入，从而减少序列中元素的位移量。4.归并排序5.堆排序6.基数排序7.拓扑排序：确定有向图是否有环
+计算机网络物理层数据链路层网络层1.完全理解ICMP协议2.IP协议详解
+传输层应用层1	
 							  
 						</p> 
 					
@@ -586,51 +642,6 @@ JAVA Web1.Socket
 					
 						<span class="continue-read">      	
 							<a href="/2018/12/25/收藏博客/" class="pull-right">
-								展开全文
-							</a>		
-						</span>
-					         		
-				</div>
-		
-			</article>
-		
-			<article class="am-g blog-entry-article">
-
-				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-					<img src="/coverimg/7.jpg" class="am-u-sm-12">
-				</div>	
-
-				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-					<span class="theme-annie-post-date">
-						<a href="/2018/12/25/error2059/" itemprop="url">
-	<time datetime="2018-12-24T21:01:59.000Z" itemprop="datePublished">
-  		2018-12-25
-  </time>
-</a>    
-
-					</span>
-					<span class="theme-annie-post-title">
-						
-	
-		<a href="/2018/12/25/error2059/" itemprop="url">		
-			Navicat连接MySQL 8出现2059 - authentication plugin &#39;caching_sha2_password&#39;的解决办法		
-		</a>
-	
-
-					</span>
-					
-					
-						<p>
-							
-								原因进入控制台，执行如下命令：12mysql -u root -p;select host,user,plugin,authentication_string from mysql.user;
-备注：host为 % 表示不限制ip。localhost表示本机使用。plugin一列中，非mysql_native_password 则需要修改密码。Navicat不支持新版MySQL的caching_s	
-							  
-						</p> 
-					
-
-					
-						<span class="continue-read">      	
-							<a href="/2018/12/25/error2059/" class="pull-right">
 								展开全文
 							</a>		
 						</span>
@@ -750,7 +761,7 @@ JAVA Web1.Socket
 	var random_bg = Math.floor(Math.random() * 109 + 1);
 
 	//var bg = 'url(/img/random/' + random_bg + '.jpg)';		
-	var bg = 'url(https://XXX-youname-XXX.github.io/Random-img/' + random_bg + '.jpg)';
+	var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
 
 	$("#header-bg-2").css("background-image", bg);
 </script>
