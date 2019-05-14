@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>A solid programmer</title>
+	<title>Java集合详讲</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -38,7 +38,7 @@
 
 <!-- header -->
 
-	<header id="header-bg-1" style="background-image: url( /img/1.jpg );">	
+	<header id="header-bg-1" style="background-image: url( /img/cover1.jpg );">	
 
 	
 		<div id="cd-logo"><a href="/"><img src="/img/logo.png" alt="Logo"></a></div>
@@ -54,14 +54,14 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Java集合详讲》</p>
 			
 		
 	
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		5/5/2019 
+		5/14/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -159,13 +159,19 @@
 				<h1 class="am-article-title blog-text-center">
 					
 					
+	
+		<a href="/2019/05/14/Java集合学习/" itemprop="url">		
+			Java集合详讲		
+		</a>
+	
+
 				</h1>
 
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
 						<a href="/2019/05/14/Java集合学习/" itemprop="url">
-	<time datetime="2019-05-14T00:14:53.740Z" itemprop="datePublished">
+	<time datetime="2019-05-13T22:11:07.000Z" itemprop="datePublished">
   		2019-05-14
   </time>
 </a>    
@@ -174,6 +180,13 @@
 					
 					<span>						
 						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#数据结构" title="数据结构" rel="3">数据结构</a>&nbsp;
+							
+								<a href="#Java" title="Java" rel="2">Java</a>&nbsp;
+													 											
+						
 					</span>
 				</p>
 			</div>
@@ -181,18 +194,13 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<p>title: Java集合详讲<br>date: 2019-5-13 06:11:07<br>tags:</p>
-<ul>
-<li>Java</li>
-<li>数据结构<br>categories: Java基础<br>cover: /coverimg/8.jpg</li>
-</ul>
-<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>Java集合作为Java基础最重要的一部分之一，也是深受面试官青睐的考点之一。尽管Java集合如此重要，楼主还是没有下功夫学习（内疚三分钟，hhh）。在经历了无数次的血虐之后，楼主终于痛定思痛，决定好好深入学习一番。ps：我还就不信了，小小的集合能难的倒我聪明伶俐又帅气的小马哥，hhh，学习之前先给自己打打气嘛~~~</p>
+						<h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>Java集合作为Java基础最重要的一部分之一，也是深受面试官青睐的考点之一。尽管Java集合如此重要，楼主还是没有下功夫学习（内疚三分钟，hhh）。在经历了无数次的血虐之后，楼主终于痛定思痛，决定好好深入学习一番。ps：我还就不信了，小小的集合能难的倒我聪明伶俐又帅气的小马哥，hhh，学习之前先给自己打打气嘛~~~</p>
 <h3 id="二、Java集合框架图"><a href="#二、Java集合框架图" class="headerlink" title="二、Java集合框架图"></a>二、Java集合框架图</h3><p>废话不多说，学习之前，咱们先来对Java的集合体系有个整体的把握。省得面试官直接问你：“讲一下Java的集合”。你不知从何说起。（诅咒这样的面试官三分钟，Java集合东西那么多，你让我说什么嘛。对于不善表达、爱敲代码的我来说，简直是送命一问，ps：掉下难过的眼泪）</p>
 <p><img src="https://i.loli.net/2019/05/12/5cd7d908a1fb5.jpg" alt=""></p>
-<p>详细版(看不清你就把浏览器页面放大点嘛，这也不能怪我)：</p>
-<p><img src="https://i.loli.net/2019/05/12/5cd7d912c3cd0.png" alt=""></p>
+<p>详细版(看不清你就把浏览器页面放大点嘛，这也不能怪我。好吧，放大你也看不清)：</p>
+<p><img src="https://i.loli.net/2019/05/14/5cdace0a14ea981724.png" alt=""></p>
 <p>简化版(说实在的，面试常考的也就这些)：</p>
-<p><img src="https://i.loli.net/2019/05/12/5cd7d917a1041.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/05/14/5cdacded8b0e191329.jpg" alt=""></p>
 <h3 id="三、集合基础知识点"><a href="#三、集合基础知识点" class="headerlink" title="三、集合基础知识点"></a>三、集合基础知识点</h3><p>对于不太熟悉集合和像我这样水平不是很强的小伙伴（谦虚一下嘛，我还是很强的。heiheihei），不建议直接刚源码。虽然集合源码必看，那咱们后面再研究嘛，谁一口也吃不了一个胖子（胖子：？？我惹你了？），掌握了基本原理，再看源码，相对来说会容易很多。</p>
 <p>接下来，咱们就以简化图为大纲，来开始我们的Java集合之旅吧。</p>
 <h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><h5 id="Iterator接口"><a href="#Iterator接口" class="headerlink" title="Iterator接口"></a>Iterator接口</h5><p><strong>简介</strong>：Iterator则主要用于遍历集合的元素。又叫迭代器。</p>
@@ -278,7 +286,7 @@
 <li>TreeSet</li>
 </ul>
 <p><strong>方法简介</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set接口仅包含从Collection继承的方法（所以在这里我就不赘述了，因为我是个懒蛋，略略略~），并添加禁止重复元素的限制，Set还为equals和hashCode操作的行为添加了一个更强的契约，允许Set实例有意义地进行比较，即使它们的实现类型不同，如果两个Set实例包含相同的元素，则它们是相等的。</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Set接口仅包含从Collection继承的方法（所以在这里我就不赘述了，因为我是个懒蛋，略略略~），并添加禁止重复元素</span><br><span class="line">的限制，Set还为equals和hashCode操作的行为添加了一个更强的契约，允许Set实例有意义地进行比较，即使它们的实现</span><br><span class="line">不同，如果两个Set实例包含相同的元素，则它们是相等的。</span><br></pre></td></tr></table></figure>
 <p><strong>注</strong>：</p>
 <p>它使用equals()方法进行比较，如果返回true，两个对象的HashCode值也应该相等。</p>
 <h5 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h5><p><strong>简介：</strong></p>
