@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		6/17/2019 
+		8/22/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -196,10 +196,10 @@
 					
 						<h3 id="为什么要有CurrentHashMap"><a href="#为什么要有CurrentHashMap" class="headerlink" title="为什么要有CurrentHashMap"></a>为什么要有CurrentHashMap</h3><ul>
 <li><p>线程不安全的HashMap</p>
-<p>HashMap是Java中最常用的一个Map类，性能好、速度快，但不能保证线程安全，它可用null作为key/value。<br>HashMap的线程不安全主要体现在resize时的死循环及使用迭代器时的fast-fail上。<br>HashMap在并发执行put会引起死循环,是因为多线程会导致HashMap的Entry链表成环,一旦成环,Entry的next节点永远不为空,产生死循环。</p>
+<p>HashMap是Java中最常用的一个Map类，性能好、速度快，但不能保证线程安全，它可用null作为key/value。<br>HashMap的线程不安全主要体现在resize时的死循环及使用迭代器时的fast-fail上。<br>HashMap在并发执行put会引起死循环,是因为<u>多线程会导致HashMap的Entry链表成环</u>,一旦成环,Entry的next节点永远不为空,产生死循环。</p>
 </li>
 <li><p>效率低下的HashTable</p>
-<p>是一个线程安全的Map类，其public方法均用synchronize修饰。<br>这表示在多线程操作时，每个线程在操作之前都会锁住整个map，待操作完成后才释放<br>如线程1使用put进行元素添加,线程2不但不能使用put方法进行添加元素,也不能使用get方法来获取元素,所以竞争越 激  烈效率越低,这必然导致多线程时性能不佳.另外，Hashtable不能使用null作为key/value。</p>
+<p>是一个线程安全的Map类，其public方法均用synchronize修饰。<br>这表示在多线程操作时，每个线程在操作之前都会<u>锁住整个map</u>，待操作完成后才释放<br>如线程1使用put进行元素添加,线程2不但不能使用put方法进行添加元素,<u>也不能使用get方法来获取元素</u>,所以竞争越激烈效率越低,这必然导致多线程时性能不佳.另外，<u>Hashtable不能使用null作为key/value</u>。</p>
 </li>
 <li><p>HashTable设计的不足</p>
 <p>我们可以回想一下，Hashtable（或者替代方案 Collections.synchronizedMap）的可伸缩性的主要障碍是它使用了一个 map 范围的锁，为了保证插入、删除或者检索操作的完整性必须保持这样一个锁，而且有时候甚至还要为了保证迭代遍历操作的完整性保持这样一个锁。这样一来，只要锁被保持，就从根本上阻止了其他线程访问 Map，即使处理器有空闲也不能访问，这样大大地限制了并发性。简单来说，就是HashTable的锁范围太大了。</p>
@@ -207,7 +207,7 @@
 </ul>
 <p>CurrentHashMap的设计思想及特点</p>
 <ul>
-<li><p>ConcurrentHashMap 摒弃了单一的 map 范围的锁，取而代之的是由 32 个锁组成的集合，其中每个锁负责保护 hash bucket 的一个子集。锁主要由变化性操作（put() 和 remove()）使用。具有 32 个独立的锁意味着最多可以有 32 个线程可以同时修改 map。这并不一定是说在并发地对 map 进行写操作的线程数少于 32 时，另外的写操作不会被阻塞――32 对于写线程来说是理论上的并发限制数目，但是实际上可能达不到这个值。但是，32 依然比 1 要好得多，而且对于运行于目前这一代的计算机系统上的大多数应用程序来说已经足够了 。<br>1）首先将数据分成一段一段地存储</p>
+<li><p>ConcurrentHashMap 摒弃了单一的 map 范围的锁，取而代之的是由 <u>32 个锁组成的集合</u>，其中每个锁负责保护 hash bucket 的一个子集。锁主要由变化性操作（put() 和 remove()）使用。具有 32 个独立的锁意味着<u>最多可以有 32 个线程</u>可以同时修改 map。这并不一定是说在并发地对 map 进行写操作的线程数少于 32 时，另外的写操作不会被阻塞――32 对于写线程来说是理论上的并发限制数目，但是实际上可能达不到这个值。但是，32 依然比 1 要好得多，而且对于运行于目前这一代的计算机系统上的大多数应用程序来说已经足够了 。<br>1）首先将数据分成一段一段地存储</p>
 <p>2）然后给每一段数据配一把锁</p>
 <p>3）当一个线程占用锁访问其中一个段数据的时候,其他段的数据也能被其他线程访问</p>
 </li>
@@ -221,11 +221,11 @@
 </ul>
 <p>一个ConcurrentHashMap里包含一个Segment数组，Segment的结构和HashMap类似，是一种数组和链表结构， 一个Segment里包含一个HashEntry数组，每个HashEntry是一个链表结构的元素， 每个Segment守护者一个HashEntry数组里的元素,当对HashEntry数组的数据进行修改时，必须首先获得它对应的Segment锁。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> HashEntry源码</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">HashEntry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;  </span><br><span class="line">     <span class="keyword">final</span> K key;  </span><br><span class="line">     <span class="keyword">final</span> <span class="keyword">int</span> hash;  </span><br><span class="line">     <span class="keyword">volatile</span> V value;  </span><br><span class="line">     <span class="keyword">final</span> HashEntry&lt;K,V&gt; next;  </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到除了value不是final的，其它值都是final的，这意味着不能从hash链的中间或尾部添加或删除节点，因为这需要修改next 引用值，所有的节点的修改只能从头部开始。对于put操作，可以一律添加到Hash链的头部。但是对于remove操作，可能需要从中间删除一个节点，这就需要将要删除节点的前面所有节点整个复制一遍，最后一个节点指向要删除结点的下一个结点。这在讲解删除操作时还会详述。为了确保读操作能够看到最新的值，将value设置成volatile，这避免了加锁。</p>
+<p>可以看到除了value不是final的，其它值都是final的，这意味着<u>不能从hash链的中间或尾部添加或删除节点</u>，因为这需要修改next 引用值，所有的节点的修改只能从头部开始。对于put操作，可以一律添加到Hash链的头部。但是对于remove操作，可能需要从中间删除一个节点，这就需要<u>将要删除节点的前面所有节点整个复制一遍</u>，最后一个节点指向要删除结点的下一个结点。这在讲解删除操作时还会详述。为了确保读操作能够看到最新的值，将value设置成volatile，这避免了加锁。</p>
 <p>  JDK1.7的CurrentHashMapHashMap 底层是基于 数组 + 链表 组成的。</p>
 <p>  <img src="https://i.loli.net/2019/05/15/5cdba2de4dd3370237.jpg" alt=""></p>
 <p>  当 Hash 冲突严重时，在桶上形成的链表会变的越来越长，这样在查询时的效率就会越来越低；时间复杂度为 O(N)。<br>  因此 1.8 中重点优化了这个查询效率。</p>
-<p> JDK1.8的ConcurrentHashMap去除了Segment分段锁的数据结构，主要是基于CAS操作保证保证数据的获取以及使用synchronized关键字对相应数据段加锁实现了主要功能，这进一步提高了并发性。同时同时为了提高哈希碰撞下的寻址性能，Java 8在链表长度超过一定阈值(8)时将链表（寻址时间复杂度为O(N)）转换为红黑树（寻址时间复杂度为O(long(N)))。</p>
+<p> JDK1.8的ConcurrentHashMap去除了Segment分段锁的数据结构，主要是基于CAS操作保证保证数据的获取以及使用synchronized关键字对相应数据段加锁实现了主要功能，这进一步提高了并发性。同时同时为了提高哈希碰撞下的寻址性能，Java 8在链表长度超过一定<u>阈值(8)</u>时将链表（寻址时间复杂度为O(N)）转换为红黑树（寻址时间复杂度为O(long(N)))。</p>
 <p>  <img src="https://i.loli.net/2019/05/15/5cdba3b4ed37b25875.jpg" alt=""></p>
 <h3 id="常用方法介绍及其原理"><a href="#常用方法介绍及其原理" class="headerlink" title="常用方法介绍及其原理"></a>常用方法介绍及其原理</h3><h4 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">V <span class="title">get</span><span class="params">(Object key, <span class="keyword">int</span> hash)</span> </span>&#123;  </span><br><span class="line">     <span class="keyword">if</span> (count != <span class="number">0</span>) &#123; <span class="comment">// read-volatile 当前桶的数据个数是否为0 </span></span><br><span class="line">         HashEntry&lt;K,V&gt; e = getFirst(hash);  得到头节点</span><br><span class="line">         <span class="keyword">while</span> (e != <span class="keyword">null</span>) &#123;  </span><br><span class="line">             <span class="keyword">if</span> (e.hash == hash &amp;&amp; key.equals(e.key)) &#123;  </span><br><span class="line">                 V v = e.value;  </span><br><span class="line">                 <span class="keyword">if</span> (v != <span class="keyword">null</span>)  </span><br><span class="line">                     <span class="keyword">return</span> v;  </span><br><span class="line">                 <span class="keyword">return</span> readValueUnderLock(e); <span class="comment">// recheck  </span></span><br><span class="line">             &#125;  </span><br><span class="line">             e = e.next;  </span><br><span class="line">         &#125;  </span><br><span class="line">     &#125;  </span><br><span class="line">     returnnull;  </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>get操作不需要锁。<br>　　除非读到的值是空的才会加锁重读，我们知道HashTable容器的get方法是需要加锁的，那么ConcurrentHashMap的get操作是如何做到不加锁的呢？原因是它的get方法里将要使用的共享变量都定义成volatile</p>

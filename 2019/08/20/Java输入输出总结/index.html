@@ -1,0 +1,505 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+
+	<!DOCTYPE html>
+	<html>
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<title>Java和C++输入输出总结</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="apple-mobile-web-app-title" content="Amaze UI">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="author" content="xiaoma">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+   	<!-- css -->
+	<link rel="stylesheet" href="/css/style.css">
+
+	<!-- favicon -->
+	<link href="/img/favicon.ico" rel="Shortcut Icon" type="image/ico">
+	
+	<!-- font-awesome -->
+	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+	<body>	
+		<!--Preloader-->
+<div id="preloader">
+	<div id="status">
+		<img alt="PRELOADER" src="/img/logo.png">
+	</div>
+</div>
+<!--Preloader end-->
+
+<!-- header -->
+
+	<header id="header-bg-1" style="background-image: url( /img/cover1.jpg );">	
+
+	
+		<div id="cd-logo"><a href="/"><img src="/img/logo.png" alt="Logo"></a></div>
+	
+	
+	<!-- motto or description -->
+		
+ 		<p class="motto"></p>
+	
+	
+	<!-- current page name or title -->
+	
+		
+		
+			
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Java和C++输入输出总结》</p>
+			
+		
+	
+	
+	<!-- others: such as change-bg, time... -->
+	<p class="page-name-other">
+		8/22/2019 
+		<style type="text/css">
+	header:after {
+		content: '';
+		position: relative;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background: #222222;
+		opacity: .5;
+		z-index: -1;
+	}
+	
+	.change-header-bg{
+		font-style: normal;
+	}
+	.change-header-bg i{
+		text-align: center;
+		cursor: pointer;
+		pointer-events: bounding-box;
+	}
+	@media(max-width:512px) {
+		.change-header-bg {
+			display: none;
+			visibility: hidden;
+		}
+	}
+	
+</style>
+
+<script type="text/javascript">
+	function changeHeaderBg(){
+		var random_bg = Math.floor(Math.random() * 109 + 1);
+		var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
+		$("#header-bg-2").css("background-image", bg);
+	}
+</script>
+
+<span class="change-header-bg">
+	——&nbsp;<i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>	
+</span>
+	</p>		
+</header>
+
+<!-- nav -->
+<div id="cd-nav">
+	<a href="#0" title="menu" class="cd-nav-trigger"><span></span></a>
+
+	<nav id="cd-main-nav">
+		<ul>
+			
+      		<li class="fa fa-/">
+           		<a href="/" title="主页">主页</a>	
+      		</li>
+    		
+      		<li class="fa fa-/archives">
+           		<a href="/archives" title="归档">归档</a>	
+      		</li>
+    		
+      		<li class="fa fa-/categories">
+           		<a href="/categories" title="分类">分类</a>	
+      		</li>
+    		
+      		<li class="fa fa-/tags">
+           		<a href="/tags" title="标签">标签</a>	
+      		</li>
+    		
+      		<li class="fa fa-/about">
+           		<a href="/about" title="关于">关于</a>	
+      		</li>
+    		
+      		<li class="fa fa-/gallery">
+           		<a href="/gallery" title="相册">相册</a>	
+      		</li>
+    		
+    		
+        	
+		</ul>
+	</nav>
+</div>
+
+		<!--main-->
+		<main> 
+		<div class="page-container">
+		<!-- content srart -->
+<div class="am-g am-g-fixed blog-fixed blog-content">
+	<div class="am-u-md-8 am-u-sm-12">
+
+		<article class="am-article blog-article-p">
+
+			<div class="am-article-hd">
+				
+
+
+				<h1 class="am-article-title blog-text-center">
+					
+					
+	
+		<a href="/2019/08/20/Java输入输出总结/" itemprop="url">		
+			Java和C++输入输出总结		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2019/08/20/Java输入输出总结/" itemprop="url">
+	<time datetime="2019-08-20T01:11:07.000Z" itemprop="datePublished">
+  		2019-08-20
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#算法" title="算法" rel="4">算法</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="Java和C-输入输出总结"><a href="#Java和C-输入输出总结" class="headerlink" title="Java和C++输入输出总结"></a>Java和C++输入输出总结</h3><h4 id="输入函数"><a href="#输入函数" class="headerlink" title="输入函数"></a>输入函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span> </span>&#123; </span><br><span class="line">         Scanner sc = <span class="keyword">new</span> Scanner(System.in); </span><br><span class="line">         String name = sc.nextLine();<span class="comment">//接收一行字符串（包含空格），下面的输入都不接受空格</span></span><br><span class="line">         String adress = sc.next();<span class="comment">//接收字符串（遇空格终止）</span></span><br><span class="line">         <span class="keyword">int</span> age = sc.nextInt(); <span class="comment">//接收int</span></span><br><span class="line">         <span class="keyword">float</span> salary = sc.nextFloat(); <span class="comment">//接收float</span></span><br><span class="line">         Long long1=scanner.nextLong();</span><br><span class="line">		 Double double1=scanner.nextDouble();</span><br><span class="line">		 Byte byte1=scanner.nextByte();</span><br><span class="line">		 Boolean boolean1=scanner.nextBoolean();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="输出函数"><a href="#输出函数" class="headerlink" title="输出函数"></a>输出函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InputAndOutputTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">			System.out.println();<span class="comment">//输出并换行，可以没参数</span></span><br><span class="line">			System.out.print(arg);<span class="comment">//只输出不换行，必须有参数</span></span><br><span class="line">            <span class="comment">//printf详细介绍</span></span><br><span class="line">			System.out.printf(format, args);</span><br><span class="line">        	System.out.printf(<span class="string">"%f"</span>, d);<span class="comment">// "f"表示格式化输出浮点数。    </span></span><br><span class="line">    	    System.out.printf(<span class="string">"%9.2f"</span>, d);/ *<span class="string">"9.2"</span>中的<span class="number">9</span>表示输出的长度，<span class="number">2</span>表示小数点后的位数。</span><br><span class="line">                注意，保留小数位会进位* /   </span><br><span class="line">      	    System.out.printf(<span class="string">"%+9.2f"</span>, d);<span class="comment">// "+"表示输出的数带正负号。  </span></span><br><span class="line">            System.out.printf(<span class="string">"%-9.4f"</span>, d);<span class="comment">// "-"表示输出的数左对齐（默认为右对齐）。  </span></span><br><span class="line">            System.out.printf(<span class="string">"%+-9.3f"</span>, d);<span class="comment">// "+-"表示输出的数带正负号且左对齐。  </span></span><br><span class="line">            System.out.printf(<span class="string">"%d"</span>, i);<span class="comment">// "d"表示输出十进制整数。  </span></span><br><span class="line">            System.out.printf(<span class="string">"%o"</span>, i);<span class="comment">// "o"表示输出八进制整数。    </span></span><br><span class="line">            System.out.printf(<span class="string">"%x"</span>, i);<span class="comment">// "d"表示输出十六进制整数。  </span></span><br><span class="line">            System.out.printf(<span class="string">"%#x"</span>, i);<span class="comment">// "d"表示输出带有十六进制标志的整数。   </span></span><br><span class="line">            System.out.printf(<span class="string">"%s"</span>, s);<span class="comment">// "d"表示输出字符</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/08/20/Wt6OCZUjpeFiXku.png" alt=""></p>
+<h3 id="C-C-输入输出"><a href="#C-C-输入输出" class="headerlink" title="C/C++输入输出"></a>C/C++输入输出</h3><h4 id="C-C-输入"><a href="#C-C-输入" class="headerlink" title="C/C++输入"></a>C/C++输入</h4><h5 id="scanf-函数"><a href="#scanf-函数" class="headerlink" title="scanf()函数"></a>scanf()函数</h5><p><strong>1)格式</strong>：</p>
+<p>scanf(“%格式%格式%格式”,&amp;变量1,&amp;变量2,&amp;变量3);</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>字符意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d</td>
+<td>输入十进制整数</td>
+</tr>
+<tr>
+<td>o</td>
+<td>输入八进制整数</td>
+</tr>
+<tr>
+<td>x</td>
+<td>输入十六进制整数</td>
+</tr>
+<tr>
+<td>u</td>
+<td>输入无符号十进制整数</td>
+</tr>
+<tr>
+<td>f或e</td>
+<td>输入实型数(用小数形式或指数形式)</td>
+</tr>
+<tr>
+<td>c</td>
+<td>输入单个字符</td>
+</tr>
+<tr>
+<td>s</td>
+<td>输入字符串</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2) “*”符</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d %*d %d"</span>,&amp;a,&amp;b);</span><br></pre></td></tr></table></figure>
+<p>当输入为：1   2   3时，把1赋予a，2被跳过，3赋予b。<br><strong>3) 宽度</strong></p>
+<p>用十进制整数指定输入的宽度（即字符数）。</p>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%5d"</span>,&amp;a);</span><br></pre></td></tr></table></figure>
+<p>输入12345678只把12345赋予变量a，其余部分被截去。</p>
+<p>又如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%4d%4d"</span>,&amp;a,&amp;b);</span><br></pre></td></tr></table></figure>
+<p>输入12345678将把1234赋予a，而把5678赋予b。</p>
+<h5 id="getchar-函数"><a href="#getchar-函数" class="headerlink" title="getchar()函数"></a>getchar()函数</h5><p><strong>1)格式</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c;</span><br><span class="line">c = getchar();</span><br></pre></td></tr></table></figure>
+<p>接收一个字符。</p>
+<h5 id="gets-char-a-函数"><a href="#gets-char-a-函数" class="headerlink" title="gets(char a[])函数"></a>gets(char a[])函数</h5><p>接收字符串，可以包含空格。</p>
+<h5 id="cin-gt-gt"><a href="#cin-gt-gt" class="headerlink" title="cin&gt;&gt;"></a>cin&gt;&gt;</h5><p>当我们从键盘输入时，有一个缓冲区，当输入结束时会将所输入的数据存到缓冲区。而cin&gt;&gt;的作用就是从缓冲区读数据，所以当缓冲区数据本来就有残留时，会出现读取出错的问题。值得一提的是：cin函数遇到空格、TAB、换行时读取结束。</p>
+<h5 id="cin-get-函数"><a href="#cin-get-函数" class="headerlink" title="cin.get()函数"></a>cin.get()函数</h5><p>原型：该函数有三种形式，分别是char ch = cin.get(), cin.get(char ch), cin.get(array,length)</p>
+<p>cin.get() 和 cin.get(char ch)这两个函数功能基本一样，都是读取缓冲区的一个字符，遇到换行符结束，但是这两个函数都不会丢弃缓冲区里边的空格和换行符。</p>
+<h5 id="getline"><a href="#getline" class="headerlink" title="getline"></a>getline</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> str;</span><br><span class="line">getline(<span class="built_in">cin</span>,str);<span class="comment">//读入string,读入一行</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> str2[<span class="number">1024</span>];</span><br><span class="line"><span class="built_in">cin</span>.getline(str2,<span class="number">1024</span>);<span class="comment">//读入char数组，读取1023个字符</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> str2[<span class="number">1024</span>];</span><br><span class="line"><span class="keyword">char</span> a;</span><br><span class="line"><span class="built_in">cin</span>.getline(str2,<span class="number">1024</span>,a);<span class="comment">//读入char数组，读取1023个字符,遇到字符a提前终止</span></span><br></pre></td></tr></table></figure>
+<h4 id="C-C-输出函数"><a href="#C-C-输出函数" class="headerlink" title="C/C++输出函数"></a>C/C++输出函数</h4><h5 id="printf"><a href="#printf" class="headerlink" title="printf()"></a>printf()</h5><h5 id="cout-lt-lt"><a href="#cout-lt-lt" class="headerlink" title="cout&lt;&lt;"></a>cout&lt;&lt;</h5>
+					
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+    	<li class="am-pagination-prev">
+   		<a class="pull-left" href="/2019/08/22/两句话搞定所有背包问题/" title="两句话搞定所有背包问题">
+      		&laquo; 上一篇
+		</a>
+		</li>
+	
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/08/09/字符串实现大数相加（含小数）/" title="字符串实现大数相加（含小数）">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
+</div>
+
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java和C-输入输出总结"><span class="post-toc-text">Java和C++输入输出总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#输入函数"><span class="post-toc-text">输入函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#输出函数"><span class="post-toc-text">输出函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#C-C-输入输出"><span class="post-toc-text">C/C++输入输出</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#C-C-输入"><span class="post-toc-text">C/C++输入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#scanf-函数"><span class="post-toc-text">scanf()函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#getchar-函数"><span class="post-toc-text">getchar()函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#gets-char-a-函数"><span class="post-toc-text">gets(char a[])函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#cin-gt-gt"><span class="post-toc-text">cin&gt;&gt;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#cin-get-函数"><span class="post-toc-text">cin.get()函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#getline"><span class="post-toc-text">getline</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#C-C-输出函数"><span class="post-toc-text">C/C++输出函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#printf"><span class="post-toc-text">printf()</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#cout-lt-lt"><span class="post-toc-text">cout&lt;&lt;</span></a></li></ol></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
+		</div>
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="blog-text-center">
+		<div class="theme-annie-social">
+				
+				
+					<a href="http://github.com/" title="Github" target="_blank"><i class="fa fa-github"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="Weibo" target="_blank"><i class="fa fa-weibo"></i>&nbsp;</a>
+				
+				
+					<a href="http://github.com/" title="Email" target="_blank"><i class="fa fa-envelope-o"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="QQ" target="_blank"><i class="fa fa-qq"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="Twitter" target="_blank"><i class="fa fa-twitter"></i>&nbsp;</a>
+						
+				
+		</div>
+	</div>
+
+	<div class="blog-text-center">
+		<div class="theme-annie-copyright">
+			
+				&copy; 2017 - 2019, content by xiaoma. All Rights Reserved.			       	
+			
+		</div>
+	</div>
+
+	<div class="blog-text-center">
+		<div class="theme-annie-copyright">
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.		
+		</div>
+	</div>
+</footer>
+		<!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script> -->
+
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+
+<style>
+	.motto {
+		color: #000000;
+		font-size: 20px;
+		margin: 100px 25% 0;
+		width: 50%;
+		line-height: 1.4;
+		font-family:"KaiTi", "STXingkai", "Source Sans Pro", "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
+		text-align: center;
+	}
+	@media(max-width: 890px) {
+		.motto {	
+			margin: 100px 10% 0;
+			width: 80%;
+		}
+	}
+	@media(max-width: 890px) {
+		.motto {
+			margin: 100px 5% 0;
+			width: 90%;
+		}
+	}
+</style>
+
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
+
+
+
+
+
+	<script type="text/javascript" src="/js/love.js"></script>
+
+
+
+	<script type="text/javascript" src="/js/toc.js"></script>
+
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript">
+	//generate a random img that pre_name 'from 0 to 110'
+	var random_bg = Math.floor(Math.random() * 109 + 1);
+
+	//var bg = 'url(/img/random/' + random_bg + '.jpg)';		
+	var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
+
+	$("#header-bg-2").css("background-image", bg);
+</script>
+		
+		<!--back to top-->
+        <style type="text/css">
+	#totop {
+		background: white;
+		border-radius: 50%;
+		position: fixed;
+		right: 5.4%;
+		bottom: 80px;
+		cursor: pointer;
+	}
+	
+	#totop a {
+		color: #474747;
+		background-color: transparent;
+		padding: 10px;
+		text-decoration: none;
+	}
+	
+	@media(max-width:512px) {
+		#totop {
+			display: none;
+			visibility: hidden;
+		}
+	}
+</style>
+
+
+	<div id="totop">
+  		<a href="javascript:;" class="fa fa-arrow-up"></a>
+	</div>
+
+	<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+	</html>
+
