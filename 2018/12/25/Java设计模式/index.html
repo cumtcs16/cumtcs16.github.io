@@ -1,0 +1,653 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+
+	<!DOCTYPE html>
+	<html>
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<title>Java23种设计模式</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="apple-mobile-web-app-title" content="Amaze UI">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="author" content="xiaoma">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+   	<!-- css -->
+	<link rel="stylesheet" href="/css/style.css">
+
+	<!-- favicon -->
+	<link href="/img/favicon.ico" rel="Shortcut Icon" type="image/ico">
+	
+	<!-- font-awesome -->
+	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+	<body>	
+		<!--Preloader-->
+<div id="preloader">
+	<div id="status">
+		<img alt="PRELOADER" src="/img/logo.png">
+	</div>
+</div>
+<!--Preloader end-->
+
+<!-- header -->
+
+	<header id="header-bg-1" style="background-image: url( /img/cover1.jpg );">	
+
+	
+		<div id="cd-logo"><a href="/"><img src="/img/logo.png" alt="Logo"></a></div>
+	
+	
+	<!-- motto or description -->
+		
+ 		<p class="motto"></p>
+	
+	
+	<!-- current page name or title -->
+	
+		
+		
+			
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Java23种设计模式》</p>
+			
+		
+	
+	
+	<!-- others: such as change-bg, time... -->
+	<p class="page-name-other">
+		8/30/2019 
+		<style type="text/css">
+	header:after {
+		content: '';
+		position: relative;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background: #222222;
+		opacity: .5;
+		z-index: -1;
+	}
+	
+	.change-header-bg{
+		font-style: normal;
+	}
+	.change-header-bg i{
+		text-align: center;
+		cursor: pointer;
+		pointer-events: bounding-box;
+	}
+	@media(max-width:512px) {
+		.change-header-bg {
+			display: none;
+			visibility: hidden;
+		}
+	}
+	
+</style>
+
+<script type="text/javascript">
+	function changeHeaderBg(){
+		var random_bg = Math.floor(Math.random() * 109 + 1);
+		var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
+		$("#header-bg-2").css("background-image", bg);
+	}
+</script>
+
+<span class="change-header-bg">
+	——&nbsp;<i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>	
+</span>
+	</p>		
+</header>
+
+<!-- nav -->
+<div id="cd-nav">
+	<a href="#0" title="menu" class="cd-nav-trigger"><span></span></a>
+
+	<nav id="cd-main-nav">
+		<ul>
+			
+      		<li class="fa fa-/">
+           		<a href="/" title="主页">主页</a>	
+      		</li>
+    		
+      		<li class="fa fa-/archives">
+           		<a href="/archives" title="归档">归档</a>	
+      		</li>
+    		
+      		<li class="fa fa-/categories">
+           		<a href="/categories" title="分类">分类</a>	
+      		</li>
+    		
+      		<li class="fa fa-/tags">
+           		<a href="/tags" title="标签">标签</a>	
+      		</li>
+    		
+      		<li class="fa fa-/about">
+           		<a href="/about" title="关于">关于</a>	
+      		</li>
+    		
+      		<li class="fa fa-/gallery">
+           		<a href="/gallery" title="相册">相册</a>	
+      		</li>
+    		
+    		
+        	
+		</ul>
+	</nav>
+</div>
+
+		<!--main-->
+		<main> 
+		<div class="page-container">
+		<!-- content srart -->
+<div class="am-g am-g-fixed blog-fixed blog-content">
+	<div class="am-u-md-8 am-u-sm-12">
+
+		<article class="am-article blog-article-p">
+
+			<div class="am-article-hd">
+				
+
+
+				<h1 class="am-article-title blog-text-center">
+					
+					
+	
+		<a href="/2018/12/25/Java设计模式/" itemprop="url">		
+			Java23种设计模式		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/12/25/Java设计模式/" itemprop="url">
+	<time datetime="2018-12-24T22:11:07.000Z" itemprop="datePublished">
+  		2018-12-25
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#Java" title="Java" rel="7">Java</a>&nbsp;
+							
+								<a href="#设计模式" title="设计模式" rel="1">设计模式</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h2 id="Java设计模式"><a href="#Java设计模式" class="headerlink" title="Java设计模式"></a>Java设计模式</h2><h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><p><strong>介绍</strong>：专门定义一个类去创建其他类的实例，被创建的实例通常具有相同的父类。</p>
+<p><strong>相关概念：</strong></p>
+<p>1.工厂(Creator) 角色<br>简单工厂模式的核心，它负责实现创建所有实例的内部逻辑。工厂类可以被外界直接调用，创建所需的产品对象。</p>
+<p>2.抽象(Product) 角色<br>简单工厂模式所创建的所有对象的父类，它负责描述所有实例所共有的公共接口。</p>
+<p>3.具体产品(Concrete Product)角色<br>简单工厂模式所创建的具体实例对象</p>
+<p><strong>优缺点</strong>：</p>
+<p>在这个模式中，工厂类是整个模式的关键所在，它包含必要的判断逻辑，能够根据外界给定的信息，决定究竟应该创建哪个具体类的对象。用户在使用时可以直接根据工厂类去创建所需的实例，而无需了解这些对象是如何创建以及如何组织的。有利于整个软件体系结构的优化。</p>
+<p>不难发现，简单工厂模式的缺点也正体现在其工厂类上，由于工厂类集中了所有实例的创建逻辑，所以“高内聚方面做的并不好。另外，当系统中的具体产品类不断增多时，可能会出现要求工厂类也要做相应的修改,扩展性并不很好。</p>
+<h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><p><strong>介绍：</strong>工厂方法模式同样属于类的创建型模式又被称为多态工厂模式。工厂方法模式的意义是定义一个创建产品对象的工厂接口，将实际创建工作推迟到子类当中。核心工厂类不再负责产品的创建，这样核心类成为一个抽象工厂角色，仅负责具体工厂子类必须实现的接口，这样进一步抽象化的好处是使得工厂方法模式可以使系统在不修改具体工厂角色的情况下引进新的产品。</p>
+<p><strong>相关概念：</strong></p>
+<p>1.抽象工厂 (Creator)</p>
+<p>角色工厂 方法模式的核心，任何工厂类都必须实现这个接口。</p>
+<p>2.具体工厂( Concrete Creator) 角色</p>
+<p>具体工厂 类是抽象工厂的一个实现，负责实例化产品对象。</p>
+<p>3.抽象(Product) 角色</p>
+<p>工厂 方法模式所创建的所有对象的父类，它负责描述所有实例所共有的公共接口。</p>
+<p>4.具体产品(Concrete Product) </p>
+<p>角色工厂 方法模式所创建的具体实例对象</p>
+<p><strong>与简单工厂模式的对比</strong></p>
+<p>工厂方法模式与简单工厂模式在结构上的不同不是很明显。工厂方法类的核心是一一个抽象工厂类，而简单工广模式把核心放在一一个具体类上。<br>工厂方法模式之所以有一个别名叫多态性工厂模式是因为具体工厂类都有共同的接口，或者有共同的抽象父类。<br>当系统扩展需要添加新的产品对象时，仅仅需要添加一一个具体对象以及一个具体工厂对象，原有工厂对象不需要进行任何修改，也不需要修改客户端，很好的符合了“开放-封闭”原则。而简单工厂模式在添加新产品对象后不得不修改工厂方法，扩展性不好。<br>工方法模式退化后叫以演变成间单工模式。</p>
+<h3 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h3><p><strong>介绍：</strong>抽象工厂模式是所有形态的工厂模式中最为抽象和最其一般性的。抽象工厂模式可以向客户端提供一个接口，使得客户端在不必指定产品的具体类型的情况下，能够创建多个产品族的产品对象。</p>
+<p><strong>相关概念：</strong></p>
+<p>  1抽象工厂(Creator) 角色</p>
+<p>  抽象工厂模式的核心，包含对多个产品结构的声明，任何工厂类都必须实现这个</p>
+<p>  2.具体工厂( Concrete Creator) 角色</p>
+<p>  具体工厂 类是抽象工厂的一个实现，负责实例化某个产品族中的产品对象。</p>
+<p>  3抽象(Product) 角色</p>
+<p>  抽象模式所创建的所有对象的父类，它负责描述所有实例所共有的公共接口。</p>
+<p>  4.具体产品(Concrete Product)角色抽象模式所创建的具体实 例对象</p>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p><strong>介绍：</strong>单例模式是一种对象创建型模式，使用单例模式，可以保证为一-个类只生成唯一的实例对象。也就是说，在整个程序空间中，该类只存在-一个实例对象。<br>其实，GoF对单例模式的定义是:保证-一个类、只有一一个实例存在，  同时提供能对该实例加以访问的全局访问方法。</p>
+<p><strong>相关实现：</strong></p>
+<ol>
+<li>饿汉式</li>
+<li>懒汉式</li>
+<li>双重检查</li>
+</ol>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p><strong>介绍：</strong>Prototype模式是一种对象创建型模式，它采取复制原型对象的方法来创建对象的实例。使用Prototype模式创建的实例，具有与原型-样的数据。</p>
+<p><strong>特点：</strong></p>
+<p>1.由原型对象自身创建目标对象。也就是说，对象创建这一动作发自 原型对象本身。<br>2.目标对象是原型对象的一个克隆。也就是说，通过Prototype模式创建的对象，不仅仅与原型对象具有相同的结构，还与原型对象具有相同的值。<br>3.根据对象克隆深度层次的不同，有浅度克隆与深度克隆。</p>
+<p><strong>适用场景：</strong></p>
+<p>-在创建对象的时候，我们不只是希望被创建的对象继承其基类的基本结构，还希望继承原型对象的数据。<br>-希望对目标对象的修改不影响既有的原型对象(深度克隆的时候可以完全互不影响)。<br>-隐藏克隆操作的细节。很多时候，对对象本身的克隆需要涉及到类本身的数据细节。</p>
+<h3 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h3><p><strong>介绍：</strong>Builder模式也叫建造者模式或者生成器模式，是由GoF提出的23种设计模式中的-一种。Builder模式是一种对象创建型模式之一，用来隐藏复合对象的创建过程，它把复合对象的创建过程加以抽象，通过子类继承和重载的方式，动态地创建具有复合属性的对象。</p>
+<p><strong>适用场景：</strong></p>
+<p>-对象的创建:Builder模式是为对象的创建而设计的模式<br>-创建的是一个复合对象:被创建的对象为一个<br>具有复合属性的复合对象<br>-关注对象创建的各部分的创建过程:不同的工厂(这里指builder生成器)对产品属性有不同的创建方法</p>
+<h3 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h3><p><strong>介绍：</strong>装饰( Decorator )模式又叫做包装模式。通过一-种对客户端透明的方式来扩展对象的功能，是继承关系的一个替换方案。</p>
+<p><strong>原理：</strong>原始对象—&gt;装饰器—&gt;装饰后的对象</p>
+<p><strong>角色和职责：</strong></p>
+<p>抽象组件角色: - 一个抽象接口，是被装饰类和装饰类的父接口。<br>具体组件角色:为抽象组件的实现类。<br>抽象装饰角色:包含一个组件的引用，并定义了与抽象组件一致的接口。<br>具体装饰角色:为抽象装饰角色的实现类。负责具体的装饰。</p>
+<h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><p><strong>介绍：</strong>Strategy模式也叫策略模式是行为模式之一，它对一系列的算法加以封装，为所有算法定义一个抽象的算法接口，并通过继承该抽象算法接口对所有的算法加以封装和实现，具体的算法选择交由客户端决定(策略)。Strategy模式主要用来平滑地处理算法的切换。</p>
+<p><strong>相关概念：</strong></p>
+<p>Strategy:：策略(算法)抽象。<br>ConcreteStrategy：各种策略(算法)的具体实现。<br>Context：策略的外部封装类，或者说策略的容器类。根据不同策略执行不同的行为。策略由外部环境决定。</p>
+<p><strong>优点：</strong></p>
+<p>1.策略模式提供了管理相关的算法族的办法。策略类的等级结构定义了一个算法或行为族。恰当使用继承可以把公共的代码移到父类里面，从而避免重复的代码。</p>
+<p>2.策略模式提供了可以替换继承关系的办法。继承可以处理多种算法或行为。如果不是用策略模式，那么使用算法或行为的环境类就可能会有一些子类，每一个子类提供一个不同的算法或行为。但是，这样一来算法或行为的使用者就和算法或行为本身混在一起。决定使用哪一种算法或采取哪-种行为的逻辑就和算法或行为的逻辑混合在一起，从而不可能再独立演化。继承使得动态改变算法或行为变得不可能。</p>
+<p>3.使用策略模式可以避免使用多重条件转移语句。多重转移语句不易维护，它把采取哪种算法或采取哪-种行为的逻辑与算法或行为的逻辑混合在一起，统统列在一个 多重转移语句里面，比使用继承的办法还要原始和落后。</p>
+<p><strong>缺点：</strong></p>
+<p>1.客户端必须知道所有的策略类，并自行决定使用哪一个策略类。这就意味着客户端必须理解这些算法的区别，以便适时选择恰当的算法类。换言之，策略模式只适用于客户端知道所有的算法或行为的情况。</p>
+<p>2.策略模式造成很多的策略类。有时候可以通过把依赖于环境的状态保存到客户端里面，而将策略类设计成可共享的，这样策略类实例可以被不同客户端使用换言之，可以使用享元模式来减少对象的数量。</p>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p><strong>介绍</strong>：</p>
+<p>Observer模式是行为模式之一，它的作用是当一个对象的状态发生变化时，能够自动通知其他关联对象，自动刷新对象状态。</p>
+<p>Observer模式提供给关联对象一种同步通信的手段，使某个对象与依赖它的其他对象之间保持状态同步。</p>
+<p><strong>相关概念：</strong></p>
+<p><strong>Subjest</strong>被观察的对象。当需要被观察的状态发生变化时，需要通知队列中所(被观察者)<br>有观察者对象。Subject需要维持(添加，珊除，通知)一个 观察者对象的队列列表。</p>
+<p><strong>Concrete Subject</strong>,被观察者的具体实现。包含些基本的属性状态及其他操作。</p>
+<p><strong>Obseryer (观察者)</strong>接口或抽象类。当Subject的状态发生变化时, Observer对 象将通过一个callback函数得到通知。</p>
+<p><strong>ConcreteObserver</strong>观察者的具体实现。得到通知后将完成一些具 体的业务逻辑处理。</p>
+<p><strong>典型应用</strong><br>-侦听事件驱动程序设计中的外部事件-侦听/监视某个对象的状态变化<br>-发布者/订阅者(publisher/subscriber)模型中，当一个外部事件(新的产品，消息的出现等等)被触发时，通知邮件列表中的订阅者</p>
+<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p><strong>介绍：</strong>Flyweight模式也叫享元模式，是构造型模式之一，它通过与其他类似对象共享数据来减小内存占用。</p>
+<p><strong>相关概念：</strong></p>
+<p>抽象享元角色:<br>所有具体享元类的父类，规定- ~些需要实现的公共接口。</p>
+<p>具体享元角色:<br>抽象享元角色的具体实现类,并实现了抽象享元角色规定的方法。</p>
+<p>享元工厂角色:<br>负责创建和管理享元角色。</p>
+<h3 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h3><p><strong>介绍：</strong>Proxy模式又叫做代理模式，是构造型的设计模式之一，它可以为其他对象提供一种代理(Proxy) 以控制对这个对象的访问。</p>
+<p>所谓代理，是指具有与代理元(被代理的对象)具有相同的接口的类，客户端必须通过代理与被代理的目标类交互，而代理一般在交互的过程中(交互前后)，进行某些特别的处理。</p>
+<p><strong>相关概念：</strong></p>
+<p>subject (抽象主题角色) :<br>真实主题与代理主题的共同接口。</p>
+<p>RealSubject (真实主题角色) :<br>定义了代理角色所代表的真实对象。</p>
+<p>Proxy (代理主题角色) :<br>含有对真实主题角 色的引用，代理角色通常在将客户端调用传递给真是主题对象之前或者之后执行某些操作，而不是单纯返回真实的对象。</p>
+<p><strong>动态代理</strong>：不用再手动创建代理对象</p>
+<h3 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h3><p><strong>介绍：</strong>Facade模式也叫外观模式，是由GoF提出的23种设计模式中的一种。Facade模式为一-组具有类似功能的类群，比如类库，子系统等等，提供一个一致的简单的界面。这个一致的简单的界面被称作facade。</p>
+<p><strong>相关概念：</strong></p>
+<p>Facade<br>为调用方定义简单的调用接口。<br>Clients<br>调用者。通过Facade接口调用提供某功能的内部类群。<br>Packages<br>功能提供者。指提供功能的类群(模块或子系统)。</p>
+<h3 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h3><p><strong>介绍：</strong>Composite模式也叫组合模式，是构造型的设计模式之- - 。通过递归手段来构造树形的对象结构，并可以通过一一个对象来访问整个对象树。</p>
+<p><strong>相关概念：</strong></p>
+<p>Component ( 树形结构的节点抽象)<br>.为所有的对象定义统一-的接口(公共属性，行为等的定义).提供管理子节点对象的接口方法<br>. [可选]提供管理父节点对象的接口方法</p>
+<p>Leaf (树 形结构的叶节点)Component的实现子类</p>
+<p>Composite (树形结构的枝节点)Component的实现子类</p>
+<h3 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h3><p><strong>介绍：</strong>Bridge模式又叫做桥接模式，是构造型的设计模式之一。Bridge模 式基于类的最小设计原则，通过使用封装，聚合以及继承等行为来让不同的类承担不同的责任。它的主要特点是把抽象(abstraction) 与行为实现(implementation)分离开来，从而可以保持各部分的独立性以及应对它们的功能扩展。</p>
+<p><strong>相关概念：</strong></p>
+<p><strong>Client</strong></p>
+<p>Bridge模式的使用者Abstraction</p>
+<p><strong>抽象类接口(接口或抽象类)</strong></p>
+<p>维护对行为实现( lmplementor)的引用Refined Abstraction</p>
+<p><strong>Abstraction子类Implementor</strong></p>
+<p>行为实现类接口(Abstraction接口定义了基于lmplementor接口的更高层次的操作)Concretelmplementor</p>
+<p>Implementor子类</p>
+<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p><strong>介绍：</strong>Adapter模式也叫透配器模式，是杓造型模式之一通辻Adapter模式可以改変已有炎(或外部炎)的接口形式。  </p>
+<p><strong>实现方式：</strong></p>
+<ul>
+<li>通过继承来实现</li>
+<li>通过委让来实现</li>
+</ul>
+<p><strong>适用场景：</strong>在大规模的系统开发过程中，我们常常碰到诸如以下这些情况:我们需要实现某些功能，这些功能已有还不太成熟的一个或多个外部组件，如果我们自己重新开发这些功能会花费大量时间;所以很多情况下会选择先暂时使用外部组件，以后再考虑随时替换。但这样一来，会带来一个问题，随着对外部组件库的替换，可能需要对引用该外部组件的源代码进行大面积的修改，因此也极可能引入新的问题等等。如何最大限度的降低修改面呢?Adapter模式就是针对这种类似需求而提出来的。</p>
+<p>Adapter模式通过定义一一个新的接口(对要实现的功能加以抽象)，和一个实现该接口的Adapter (适配器)类来透明地调用外部组件。这样替换外部组件时，最多只要修改几个Adapter类就可以了，其他源代码都不会受到影响。</p>
+<h3 id="解释器模式"><a href="#解释器模式" class="headerlink" title="解释器模式"></a>解释器模式</h3><p><strong>介绍：</strong>Interpreter模式 也叫解释器模式，是行为模式之一，它是一种特殊的设计模式，它建立一个解释器，对于特定的计算机程序设计语言，用来解释预先定义的文法。简单地说，Interpreter模式是 一种简单的语法解释器构架。</p>
+<p><strong>相关概念：</strong></p>
+<p>Context<br>解释器上下文环境类。用来存储解释器的.上下文环境，比如需要解释的文法等。<br>AbstractExpression<br>解释器抽象类。<br>ConcreteExpression<br>解释器具体实现类。</p>
+<p><strong>适用场景：</strong></p>
+<p>  ●  当有一个语言需要解释执行,并且你可将该语言中的句子表示</p>
+<p>  为一个抽象语法树时，可使用解释器模式。而当存在以下情况时该模式效果最好:</p>
+<p>  ●  该文法简单对于复杂的文法,文法的类层次变得庞大而无法管</p>
+<p>  理。此时语法分析程序生成器这样的工具是更好的选择。它们无需构建抽象语法树即可解释表达式，这样可以节省空间而且还可能节省时间。</p>
+<p>  ●  效率不是一个关键问题，最高效的解释器通常不是通过直接</p>
+<p>  解释语法分析树实现的,而是首先将它们转换成另一种形式。例如，正则表达式通常被转换成状态机。但即使在这种情况下,转换器仍可用解释器模式实现,该模式仍是有用的。</p>
+<h3 id="中介模式"><a href="#中介模式" class="headerlink" title="中介模式"></a>中介模式</h3><p><strong>介绍：</strong>Mediator模式也叫中介者模式，是由GoF提出的23种软件设计模式的一种。Mediator模式是行为模式之一，在Mediator模式中，类之间的交互行为被统一放在Mediator的对象中，对象通过Mediator对象同其他对象交互，Mediator对 象起着控制器的作用。</p>
+<p><strong>相关概念：</strong></p>
+<p>mediator<br>中介者类的抽象父类。</p>
+<p>concrete Mediator<br>具体的中介者类。</p>
+<p>colleague<br>关联类的抽象父类。</p>
+<p>concreteColleague<br>具体的关联类。</p>
+<p><strong>优点：</strong></p>
+<p>1，将系统按功能分割成更小的对象，符合类的最小设计原则</p>
+<p>2，对关联对象的集中控制</p>
+<p>3,减小类的耦合程度，明确类之间的相互关系:当类之间的关系过于复杂时，其中任何一个类的修改都会影响到其他类，不符合类的设计的开闭原则，而Mediator模式将原来相互依存的多对多的类之间的关系简化为Mediator控制类与其他关联类的一对多的关系，当其中一个类修改时，可以对其他关联类不产生影响(即使有修改，也集中在Mediator控制类) 。4，有利于提高类的重用性</p>
+<h3 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h3><p><strong>介绍：</strong>Chain of Responsibility (CoR)模式也叫职责链模式或者职责连锁模式，是行为模式之一，该模式构造一系列分别担当不同的职责的类的对象来共同完成一个任务，这些类的对象之间像链条一样紧密相连，所以被称作职责链模式。</p>
+<p><strong>相关概念：</strong></p>
+<p>Handler<br>处理类的抽象父类。</p>
+<p>concreteHandler<br>具体的处理类。</p>
+<p><strong>例子：</strong>比如客户Client要完成一个任务，这个任务包括a,b,c,d四个部分。</p>
+<p>首先客户Client把任务交给A，A完成a部分之后，把任务交给B，B完成b部分，.  直到D完成d部分。</p>
+<p>例2:比如政府部分的某项工作，县政府先完成自己能处理的部分，不能处理的部分交给省政府，省政府再完成自己职责范围内的部分，不能处理的部分交给中央政府，中央政府最后完成该项工作。例3:软件窗口的消息传播。</p>
+<p>例4: SERVLET容器的过滤器(Filter) 框架实现。</p>
+<p><strong>实现条件：</strong></p>
+<p>要实现Chain of Responsibility模式，需要满足该模式的基本条件:</p>
+<p>1，对象链的组织。需要将某任务的所有职责执行对象以链的形式加以组织。</p>
+<p>2，消息或请求的传递。将消息或请求沿着对象链传递，以让处于对象链中的对象得到处理机会。</p>
+<p>3,处于对象链中的对象的职责分配。不同的对象完成不同的职责。</p>
+<p>4，任务的完成。处于对象链的末尾的对象结束任务并停止消息或请求的继续传递。</p>
+<p><strong>优点:</strong></p>
+<p>1.责任的分担。每个类只需要处理自己该处理的工作(不该处理的传递给下一个对象完成)，明确各类的责任范围，符合类的最小封装原则。</p>
+<p>2.可以根据需要自由组合工作流程。如工作流程发生变化，可以通过重新分配对象链便可适应新的工作流程。      3.类与类之间可以以松耦合的形式加以组织。</p>
+<p><strong>缺点:</strong></p>
+<p>因为处理时以链的形式在对象间传递消息，根据实现方式不同，有可能会影响处理的速度。</p>
+<h3 id="迭代模式"><a href="#迭代模式" class="headerlink" title="迭代模式"></a>迭代模式</h3><p><strong>介绍：</strong>lterator模式也叫迭代模式，是行为模式之一，它把对容器中包含的内部对象的访问委让给外部类，使用Iterator (遍历)按顺序进行遍历访问的设计模式。</p>
+<p>在应用Iterator模式之前，首先应该明白Iterator模式用来解决什么问题。或者说，如果不使用Iterator模式，会存在什么问题。。<br>1.由容器自已实现顺序遍历。直接在容器类里直接添加顺序 遍历方法<br>2.让调用者自己实现遍历。直接暴露数据细节给<br>外部。</p>
+<p>以上方法1与方法2都可以实现对遍历，这样有问题呢?<br>1，容器类承担了太多功能:一方面需要提供添<br>加删除等本身应有的功能;一方面还需要提供遍历访问功能。<br>2，往往容器在实现遍历的过程中，需要保存遍<br>历状态，当跟元素的添加删除等功能夹杂在一起，很容易引起混乱和程序运行错误等。</p>
+<p>lterator模式就是为了有效地处理按顺序进行遍历访问的一种设计模式，简单地说，Iterator模式提供一 种有效的方法，可以屏蔽聚集对象集合的容器类的实现细节，而能对容器内包含的对象元素按顺序进行有效的遍历访问。</p>
+<p>所以，Iterator模 式的应用场景可以归纳为满足以下几个条件:</p>
+<p>-访问容器中包含的内部对象</p>
+<p>-按顺序访问</p>
+<p><strong>相关概念：</strong></p>
+<p>Iterator (迭代器接口) :</p>
+<p>该接口必须定义实现迭代功能的最小定义方法集比如提供hasNext()和next()方法。</p>
+<p>Concretelterator (迭代器实现类) :</p>
+<p>迭代器接口Iterator的实现类。可以根据具体情况加以实现。</p>
+<p>Aggregate (容器接口) :</p>
+<p>定义基本功能以及提供类似Iterator iterator()的方法。</p>
+<p>concretelAggregate (容器实现类) :</p>
+<p>容器接口的实现类。必须实现Iterator iterator()方法。</p>
+<p><strong>优点：</strong></p>
+<p>1，实现功能分离，简化容器接口。让容器只实<br>现本身的基本功能，把迭代功能委让给外部类实现，符合类的设计原则。2，隐藏容器的实现细节。<br>3，为容器或其子容器提供了一个统-接口，一方面方便调用;另一方面使得调用者不必关注迭代器的实现细节。<br>4，可以为容器或其子容器实现不同的迭代方法或多个迭代方法。</p>
+<h3 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h3><p><strong>介绍：</strong>Template Method模式也叫模板方法模式，是行为模式之一，它把具有特定步骤算法中的某些必要的处理委让给抽象方法，通过子类继承对抽象方法的不同实现改变整个算法的行为。</p>
+<p>也就是把相关的方法组织在一个模板中，直接调用模板即可，不用再一个一个的调用方法。</p>
+<p><strong>应用场景：</strong></p>
+<p>Template Method模式- -般应用在具有以下条件的应用中:<br>-具有统一的操作步骤或操作过程-具有不同的操作细节<br>-存在多个具有同样操作步骤的应用场景，但某<br>些具体的操作细节却各不相同</p>
+<h3 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h3><p><strong>介绍：</strong>Memento模式也叫备忘录模式，是行为模式之它的作用是保存对象的内部状态，并在需要的时候( undo/rollback)恢复对象以前的状态。</p>
+<p><strong>相关概念：</strong></p>
+<p>Originator (原生者)<br>需要被保存状态以便恢复的那个对象。</p>
+<p>Memento (备忘录)<br>该对象由Originator创建，主要用来保存Originator的内部状态</p>
+<p>Caretaker (管理者)<br>负责在适当的时间保存/恢复Originator对象的状态</p>
+<p><strong>适用场景：</strong></p>
+<p>如果一个对象需要保存状态并可通过undo或rollback等操作恢复到以前的状态时，可以使用Memento模式。</p>
+<p>1)一个类需要保存它的对象的状态(相当于Originator角色)</p>
+<p>2)设计一个类，该类只是用来保存上述对象的状态(相当于Memento角色)</p>
+<p>3)需要的时候，Caretaker角 色要求Originator返回一个Memento并加以保存</p>
+<p>4) undo或rollback操 作时，通过Caretaker保存 的Memento恢复Originator对象的状态</p>
+<h3 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h3><p><strong>介绍：</strong>State模式也叫状态模式，是行为设计模式的-种。State模式允许通过改变对象的内部状态而改变对象的行为，这个对象表现得就好像修改了它的类一样。</p>
+<p><strong>相关概念：</strong></p>
+<p>Context:用户对象<br>拥有一个State类型的成员，以标识对象的当前状态;<br>State:  接口或基类<br>封装与Context的特定状态相关的行为;</p>
+<p>ConcreteState:接口实现类或子类<br>实现了一个与Context某个状态相关的行为。</p>
+<p><strong>适用场景：</strong>状态模式主要解决的是当控制一个对象状态转换的条件表达式过于复杂时的情况。把状态的判断逻辑转译到表现不同状态的一- 系列类当中，可以把复杂的判断逻辑简化。</p>
+<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><p><strong>介绍：</strong>Command模式也叫命令模式，是行为设计模式的一种。Command模 式通过被称为<br>Command的类封装了对目标对象的调用行为以及调用参数。</p>
+<p><strong>相关概念：</strong></p>
+<p>Command<br>Command抽象类。</p>
+<p>ConcreteCommand<br>Command的具体实现类。</p>
+<p>Receiver<br>需要被调用的目标对象。</p>
+<p>Invorker<br>通过Invorker执行Command对象。</p>
+<p><strong>适用场景：</strong></p>
+<p>在面向对象的程序设计中，一个对象调用另一个对象，一般情况下的调用过程是:创建目标对象实例;设置调用参数;调用目标对象的方法。</p>
+<p>但在有 些情况下有必要使用一个专门的类对这种调用过程加以封装，我们把这种专门的类称作command类。一整个调用过程比较繁杂，或者存在多处这种调用。这时，使用Command类对该调用加以封装，便于功能的再利用。</p>
+<p>  -调用前后需要对调用参数进行某些处理。.</p>
+<p>  -调用前后需要进行某些额外处理，比如日志，缓存，记录历史操作等。</p>
+<h3 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h3><p><strong>介绍：</strong>Visitor模式也叫访问者模式，是行为模式之一它分离对象的数据和行为，使用Visitor模式，可以不修改已有类的情况下，增加新的操作。</p>
+<p><strong>相关概念：</strong></p>
+<p>1)访问者角色(Visitor) :</p>
+<p>为该对象结构中具体元素角色声明一个访问操作接口。该操作接口的名字和参数标识了发送访问请求给具体访问者的具体元素角色。这样访问者就可以通过该元素角色的特定接口直接访问它。</p>
+<p>2)具体访问者角色(Concrete Visitor) :</p>
+<p>实现每个由访问者角色(Visitor) 声明的操作。</p>
+<p>3)元素角色( Element) :</p>
+<p>定义一个Accept操作，它以一一个访问者为参数。</p>
+<p>4)具体元素角色(Concrete Element) :</p>
+<p>实现由元素角色提供的Accept操作。</p>
+<p>5)对象结构角色(Object Structure) :</p>
+<p>这是使用访问者模式必备的角色。它要具备以下特征:能枚举它的元素，可以提供一个高层的接口以允许该访问者访问它的元素;可以是一个复合(组合模式)或是一个集合，如一个列表或一个无序集合。</p>
+<p>例子：</p>
+<p>​        比如有一个公园，有一到多个不同的组成部分;该公园存在多个访问者:清洁工A负责打扫公园的A部分，清洁工B负责打扫公园的B部分，公园的管理者负责检点各项事务是否完成，.上级领导可以视察公园等等。也就是说，对于同一个公园，不同的访问者有不同的行为操作，而且访问者的种类也可能需要根据时间的推移而变化(行为的扩展性)。</p>
+<p>根据软件设计的开闭原则 (对修改关闭，对扩展开放)，我们怎么样实现这种需求呢?</p>
+
+					
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+    	<li class="am-pagination-prev">
+   		<a class="pull-left" href="/2018/12/25/收藏博客/" title="收藏的优秀博客文章">
+      		&laquo; 上一篇
+		</a>
+		</li>
+	
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/12/25/error2059/" title="Navicat连接MySQL 8出现2059 - authentication plugin 'caching_sha2_password'的解决办法">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
+</div>
+
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java设计模式"><span class="post-toc-text">Java设计模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单工厂模式"><span class="post-toc-text">简单工厂模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工厂方法模式"><span class="post-toc-text">工厂方法模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#抽象工厂模式"><span class="post-toc-text">抽象工厂模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单例模式"><span class="post-toc-text">单例模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原型模式"><span class="post-toc-text">原型模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建造者模式"><span class="post-toc-text">建造者模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#装饰模式"><span class="post-toc-text">装饰模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#策略模式"><span class="post-toc-text">策略模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#观察者模式"><span class="post-toc-text">观察者模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#享元模式"><span class="post-toc-text">享元模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代理模式"><span class="post-toc-text">代理模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#外观模式"><span class="post-toc-text">外观模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组合模式"><span class="post-toc-text">组合模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#桥接模式"><span class="post-toc-text">桥接模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#适配器模式"><span class="post-toc-text">适配器模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解释器模式"><span class="post-toc-text">解释器模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#中介模式"><span class="post-toc-text">中介模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#责任链模式"><span class="post-toc-text">责任链模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#迭代模式"><span class="post-toc-text">迭代模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模板方法模式"><span class="post-toc-text">模板方法模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#备忘录模式"><span class="post-toc-text">备忘录模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#状态模式"><span class="post-toc-text">状态模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#命令模式"><span class="post-toc-text">命令模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#访问者模式"><span class="post-toc-text">访问者模式</span></a></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
+		</div>
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="blog-text-center">
+		<div class="theme-annie-social">
+				
+				
+					<a href="http://github.com/" title="Github" target="_blank"><i class="fa fa-github"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="Weibo" target="_blank"><i class="fa fa-weibo"></i>&nbsp;</a>
+				
+				
+					<a href="http://github.com/" title="Email" target="_blank"><i class="fa fa-envelope-o"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="QQ" target="_blank"><i class="fa fa-qq"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="Twitter" target="_blank"><i class="fa fa-twitter"></i>&nbsp;</a>
+						
+				
+		</div>
+	</div>
+
+	<div class="blog-text-center">
+		<div class="theme-annie-copyright">
+			
+				&copy; 2017 - 2019, content by xiaoma. All Rights Reserved.			       	
+			
+		</div>
+	</div>
+
+	<div class="blog-text-center">
+		<div class="theme-annie-copyright">
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.		
+		</div>
+	</div>
+</footer>
+		<!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script> -->
+
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+
+<style>
+	.motto {
+		color: #000000;
+		font-size: 20px;
+		margin: 100px 25% 0;
+		width: 50%;
+		line-height: 1.4;
+		font-family:"KaiTi", "STXingkai", "Source Sans Pro", "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
+		text-align: center;
+	}
+	@media(max-width: 890px) {
+		.motto {	
+			margin: 100px 10% 0;
+			width: 80%;
+		}
+	}
+	@media(max-width: 890px) {
+		.motto {
+			margin: 100px 5% 0;
+			width: 90%;
+		}
+	}
+</style>
+
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
+
+
+
+
+
+	<script type="text/javascript" src="/js/love.js"></script>
+
+
+
+	<script type="text/javascript" src="/js/toc.js"></script>
+
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript">
+	//generate a random img that pre_name 'from 0 to 110'
+	var random_bg = Math.floor(Math.random() * 109 + 1);
+
+	//var bg = 'url(/img/random/' + random_bg + '.jpg)';		
+	var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
+
+	$("#header-bg-2").css("background-image", bg);
+</script>
+		
+		<!--back to top-->
+        <style type="text/css">
+	#totop {
+		background: white;
+		border-radius: 50%;
+		position: fixed;
+		right: 5.4%;
+		bottom: 80px;
+		cursor: pointer;
+	}
+	
+	#totop a {
+		color: #474747;
+		background-color: transparent;
+		padding: 10px;
+		text-decoration: none;
+	}
+	
+	@media(max-width:512px) {
+		#totop {
+			display: none;
+			visibility: hidden;
+		}
+	}
+</style>
+
+
+	<div id="totop">
+  		<a href="javascript:;" class="fa fa-arrow-up"></a>
+	</div>
+
+	<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+	</html>
+

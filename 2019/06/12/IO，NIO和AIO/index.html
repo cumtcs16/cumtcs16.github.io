@@ -1,0 +1,531 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+
+	<!DOCTYPE html>
+	<html>
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<title>IO，NIO和AIO</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="apple-mobile-web-app-title" content="Amaze UI">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="author" content="xiaoma">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+   	<!-- css -->
+	<link rel="stylesheet" href="/css/style.css">
+
+	<!-- favicon -->
+	<link href="/img/favicon.ico" rel="Shortcut Icon" type="image/ico">
+	
+	<!-- font-awesome -->
+	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+	<body>	
+		<!--Preloader-->
+<div id="preloader">
+	<div id="status">
+		<img alt="PRELOADER" src="/img/logo.png">
+	</div>
+</div>
+<!--Preloader end-->
+
+<!-- header -->
+
+	<header id="header-bg-1" style="background-image: url( /img/cover1.jpg );">	
+
+	
+		<div id="cd-logo"><a href="/"><img src="/img/logo.png" alt="Logo"></a></div>
+	
+	
+	<!-- motto or description -->
+		
+ 		<p class="motto"></p>
+	
+	
+	<!-- current page name or title -->
+	
+		
+		
+			
+			<p class="page-name">当前文章&nbsp;:&nbsp;《IO，NIO和AIO》</p>
+			
+		
+	
+	
+	<!-- others: such as change-bg, time... -->
+	<p class="page-name-other">
+		8/30/2019 
+		<style type="text/css">
+	header:after {
+		content: '';
+		position: relative;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background: #222222;
+		opacity: .5;
+		z-index: -1;
+	}
+	
+	.change-header-bg{
+		font-style: normal;
+	}
+	.change-header-bg i{
+		text-align: center;
+		cursor: pointer;
+		pointer-events: bounding-box;
+	}
+	@media(max-width:512px) {
+		.change-header-bg {
+			display: none;
+			visibility: hidden;
+		}
+	}
+	
+</style>
+
+<script type="text/javascript">
+	function changeHeaderBg(){
+		var random_bg = Math.floor(Math.random() * 109 + 1);
+		var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
+		$("#header-bg-2").css("background-image", bg);
+	}
+</script>
+
+<span class="change-header-bg">
+	——&nbsp;<i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>	
+</span>
+	</p>		
+</header>
+
+<!-- nav -->
+<div id="cd-nav">
+	<a href="#0" title="menu" class="cd-nav-trigger"><span></span></a>
+
+	<nav id="cd-main-nav">
+		<ul>
+			
+      		<li class="fa fa-/">
+           		<a href="/" title="主页">主页</a>	
+      		</li>
+    		
+      		<li class="fa fa-/archives">
+           		<a href="/archives" title="归档">归档</a>	
+      		</li>
+    		
+      		<li class="fa fa-/categories">
+           		<a href="/categories" title="分类">分类</a>	
+      		</li>
+    		
+      		<li class="fa fa-/tags">
+           		<a href="/tags" title="标签">标签</a>	
+      		</li>
+    		
+      		<li class="fa fa-/about">
+           		<a href="/about" title="关于">关于</a>	
+      		</li>
+    		
+      		<li class="fa fa-/gallery">
+           		<a href="/gallery" title="相册">相册</a>	
+      		</li>
+    		
+    		
+        	
+		</ul>
+	</nav>
+</div>
+
+		<!--main-->
+		<main> 
+		<div class="page-container">
+		<!-- content srart -->
+<div class="am-g am-g-fixed blog-fixed blog-content">
+	<div class="am-u-md-8 am-u-sm-12">
+
+		<article class="am-article blog-article-p">
+
+			<div class="am-article-hd">
+				
+
+
+				<h1 class="am-article-title blog-text-center">
+					
+					
+	
+		<a href="/2019/06/12/IO，NIO和AIO/" itemprop="url">		
+			IO，NIO和AIO		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2019/06/12/IO，NIO和AIO/" itemprop="url">
+	<time datetime="2019-06-12T10:11:07.000Z" itemprop="datePublished">
+  		2019-06-12
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#Java" title="Java" rel="7">Java</a>&nbsp;
+							
+								<a href="#IO" title="IO" rel="1">IO</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="IO和NIO"><a href="#IO和NIO" class="headerlink" title="IO和NIO"></a>IO和NIO</h3><h4 id="NIO简介"><a href="#NIO简介" class="headerlink" title="NIO简介"></a>NIO简介</h4><p>NIO即New IO，这个库是在JDK1.4中才引入的。NIO和IO有相同的作用和目的，但实现方式不同，<u>NIO主要用到的是<strong>块</strong>，所以NIO的效率要比IO高很多</u>。</p>
+<h4 id="IO与NIO对比"><a href="#IO与NIO对比" class="headerlink" title="IO与NIO对比"></a>IO与NIO对比</h4><table>
+<thead>
+<tr>
+<th>IO</th>
+<th>NIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>面向流</td>
+<td>面向缓冲</td>
+</tr>
+<tr>
+<td>阻塞IO</td>
+<td>同步非阻塞IO</td>
+</tr>
+<tr>
+<td>无</td>
+<td>选择器</td>
+</tr>
+</tbody>
+</table>
+<p><strong>流与缓冲</strong></p>
+<ul>
+<li><strong>Java IO</strong>面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。</li>
+<li><strong>Java NIO</strong>的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。</li>
+</ul>
+<p><strong>阻塞IO与非阻塞IO</strong></p>
+<ul>
+<li><strong>Java IO</strong><u>的各种流是阻塞的</u>。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。</li>
+<li><strong>Java NIO</strong>的<u>非阻塞模式</u>，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取，而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</li>
+</ul>
+<p><strong>选择器</strong></p>
+<ul>
+<li>Java NIO的选择器允许<u>一个单独的线程来监视多个输入通道</u>，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道。</li>
+</ul>
+<p><strong>区别总结</strong></p>
+<p>我们使用<u>BIO的时候往往会引入多线程，每个连接一个单独的线程</u>；而<u>NIO则是使用单线程或者只使用少量的多线程，多个连接共用一个线程</u>。 NIO的最重要的地方是当一个连接创建后，不需要对应一个线程，这个连接会被注册到多路复用器上面，所以所有的连接只需要一个线程就可以搞定，当这个线程中的多路复用器进行轮询的时候，发现连接上有请求的话，才开启一个线程进行处理，也就是一个请求一个线程模式。</p>
+<p>但是，<u>在NIO的处理方式中，当一个请求来的话，开启线程进行处理</u>，可能会等待后端应用的资源(JDBC连接等)，因为NIO是同步的，当并发上来的话，还是会有BIO一样的问题</p>
+<h4 id="NIO特点"><a href="#NIO特点" class="headerlink" title="NIO特点"></a>NIO特点</h4><ul>
+<li>NIO是基于块（Block）的，它以块为基本单位处理数据 （硬盘上存储的单位也是按Block来存储，这样性能上比基于流的方式要好一些）</li>
+<li>为所有的原始类型提供（Buffer）缓存支持</li>
+<li>增加通道（Channel）对象，作为新的原始 I/O 抽象</li>
+<li>支持锁（我们在平时使用时经常能看到会出现一些.lock的文件，这说明有线程正在使用这把锁，当线程释放锁时，会把这个文件删除掉，这样其他线程才能继续拿到这把锁）和内存映射文件的文件访问接口</li>
+<li>提供了基于Selector的异步网络I/O</li>
+</ul>
+<h4 id="NIO的几个重要组成部分"><a href="#NIO的几个重要组成部分" class="headerlink" title="NIO的几个重要组成部分"></a>NIO的几个重要组成部分</h4><h5 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h5><p>缓冲区实际上是一个容器对象，更直接的说，其实就是一个数组，在NIO库中，所有数据都是用缓冲区处理的。在读取数据时，它是直接读到缓冲区中的； 在写入数据时，它也是写入到缓冲区中的；任何时候访问 NIO 中的数据，都是将它放到缓冲区中。而在面向流I/O系统中，所有数据都是直接写入或者直接将数据读取到Stream对象中。</p>
+<p>在NIO中，所有的缓冲区类型都继承于抽象类Buffer，最常用的就是ByteBuffer，对于Java中的基本类型，基本都有一个具体Buffer类型与之相对应，它们之间的继承关系如下图所示：</p>
+<p><img src="https://i.loli.net/2019/05/27/5cebd819b50c940099.png" alt=""></p>
+<p><strong>缓冲区的属性：</strong></p>
+<ul>
+<li><strong>容量（Capacity）</strong>：缓冲区能够容纳的数据元素的最大数量。这一个容量在缓冲区创建时被设定，并且永远不能改变。</li>
+<li><strong>上界(Limit)</strong>：缓冲区的第一个不能被读或写的元素。或者说,缓冲区中现存元素的计数。</li>
+<li><strong>位置(Position)</strong>：下一个要被读或写的元素的索引。位置会自动由相应的 get( )和 put( )函数更新。</li>
+<li><strong>标记(Mark)</strong>：下一个要被读或写的元素的索引。位置会自动由相应的 get( )和 put( )函数更新。</li>
+</ul>
+<h5 id="通道"><a href="#通道" class="headerlink" title="通道"></a>通道</h5><p>通道是一个对象，通过它可以读取和写入数据，当然了所有数据都通过Buffer对象来处理。我们永远<u>不会将字节直接写入通道中</u>，相反是将数据写入包含一个或者多个字节的缓冲区。同样<u>不会直接从通道中读取字节，而是将数据从通道读入缓冲区，再从缓冲区获取这个字节</u>。</p>
+<p>在NIO中，提供了多种通道对象，而所有的通道对象都实现了Channel接口。它们之间的继承关系如下图所示：</p>
+<p><img src="https://i.loli.net/2019/05/27/5cebd8d996cbc78742.png" alt=""></p>
+<p><strong>NIO读取数据的步骤：</strong></p>
+<ol>
+<li>从FileInputStream获取Channel</li>
+<li>创建Buffer</li>
+<li>将数据从Channel读取到Buffer中</li>
+</ol>
+<p><strong>使用NIO写入数据的步骤：</strong></p>
+<ol>
+<li>从FileInputStream获取Channel</li>
+<li>创建Buffer</li>
+<li>将数据从Channel写入到Buffer中</li>
+</ol>
+<h5 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h5><p><strong>传统C/S架构的弊端：</strong></p>
+<p>传统的 server / client 模式会基于 TPR ( Thread per Request ) ．服务器会为每个客户端请求建立一个线程．由该线程单独负贵处理一个客户请求。这种模式带未的一个问题就是线程数是的剧增．大量的线程会增大服务器的开销，大多数的实现为了避免这个问题，都采用了线程池模型，并设置线程池线程的最大数量，这又带来了新的问题，如果线程池中有 200 个线程，而有 200 个用户都在进行大文件下载，会导致第 201 个用户的请求无法及时处理，即便第 201 个用户只想请求一个几 KB 大小的页面。</p>
+<p><strong>NIO的原理</strong></p>
+<p>NIO 中非阻塞IO采用了基于Reactor模式的工作方式，IO调用不会被阻塞，相反是注册感兴趣的特点IO事件，如可读数据到达，新的套接字等等，在发生持定率件时，系统再通知我们。 NlO中实现非阻塞IO的核心设计Selector，Selector就是注册各种IO事件的地方，而且当那些事件发生时，就是这个对象告诉我们所发生的事件。</p>
+<p><strong>使用NIO中非阻塞IO编写服务器处理程序的步骤：</strong></p>
+<ol>
+<li>向Selector对象注册感兴趣的事件</li>
+<li>从Selector中获取感兴趣的事件</li>
+<li>根据不同事件进行相应的处理</li>
+</ol>
+<h3 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h3><h4 id="AIO简介"><a href="#AIO简介" class="headerlink" title="AIO简介"></a>AIO简介</h4><p>也叫做<strong>异步非阻塞I/O</strong>(AIO)，用户程序可以通过向内核发出I/O请求命令，不用等带I/O事件真正发生，可以继续做 另外的事情，等<u>I/O操作完成，内核会通过函数回调或者信号机制通知用户进程</u>。这样很大程度提高了系统吞吐量。AIO 背后的基本思想是<u>允许进程发起很多 I/O 操作，而不用阻塞或等待任何操作完成</u>。稍后或在接收到 I/O 操作完成的通知时，进程就可以检索 I/O 操作的结果。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/lisha006/article/details/82856906" target="_blank" rel="noopener">BIO、NIO和AIO的原理和应用</a></p>
+<p><a href="https://www.jianshu.com/p/ef418ccf2f7d" target="_blank" rel="noopener">聊聊BIO、NIO和AIO以及select、poll和epoll的原理</a></p>
+
+					
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+    	<li class="am-pagination-prev">
+   		<a class="pull-left" href="/2019/06/17/进程同步之信号量机制/" title="进程同步之信号量机制">
+      		&laquo; 上一篇
+		</a>
+		</li>
+	
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/06/12/Java技术栈视频大全/" title="Java技术栈视频大全">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
+</div>
+
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IO和NIO"><span class="post-toc-text">IO和NIO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NIO简介"><span class="post-toc-text">NIO简介</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#IO与NIO对比"><span class="post-toc-text">IO与NIO对比</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NIO特点"><span class="post-toc-text">NIO特点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NIO的几个重要组成部分"><span class="post-toc-text">NIO的几个重要组成部分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#缓冲区"><span class="post-toc-text">缓冲区</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#通道"><span class="post-toc-text">通道</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#选择器"><span class="post-toc-text">选择器</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AIO"><span class="post-toc-text">AIO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#AIO简介"><span class="post-toc-text">AIO简介</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考"><span class="post-toc-text">参考</span></a></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
+		</div>
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="blog-text-center">
+		<div class="theme-annie-social">
+				
+				
+					<a href="http://github.com/" title="Github" target="_blank"><i class="fa fa-github"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="Weibo" target="_blank"><i class="fa fa-weibo"></i>&nbsp;</a>
+				
+				
+					<a href="http://github.com/" title="Email" target="_blank"><i class="fa fa-envelope-o"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="QQ" target="_blank"><i class="fa fa-qq"></i>&nbsp;</a>
+					
+				
+					<a href="http://github.com/" title="Twitter" target="_blank"><i class="fa fa-twitter"></i>&nbsp;</a>
+						
+				
+		</div>
+	</div>
+
+	<div class="blog-text-center">
+		<div class="theme-annie-copyright">
+			
+				&copy; 2017 - 2019, content by xiaoma. All Rights Reserved.			       	
+			
+		</div>
+	</div>
+
+	<div class="blog-text-center">
+		<div class="theme-annie-copyright">
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.		
+		</div>
+	</div>
+</footer>
+		<!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script> -->
+
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+
+<style>
+	.motto {
+		color: #000000;
+		font-size: 20px;
+		margin: 100px 25% 0;
+		width: 50%;
+		line-height: 1.4;
+		font-family:"KaiTi", "STXingkai", "Source Sans Pro", "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
+		text-align: center;
+	}
+	@media(max-width: 890px) {
+		.motto {	
+			margin: 100px 10% 0;
+			width: 80%;
+		}
+	}
+	@media(max-width: 890px) {
+		.motto {
+			margin: 100px 5% 0;
+			width: 90%;
+		}
+	}
+</style>
+
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
+
+
+
+
+
+	<script type="text/javascript" src="/js/love.js"></script>
+
+
+
+	<script type="text/javascript" src="/js/toc.js"></script>
+
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript">
+	//generate a random img that pre_name 'from 0 to 110'
+	var random_bg = Math.floor(Math.random() * 109 + 1);
+
+	//var bg = 'url(/img/random/' + random_bg + '.jpg)';		
+	var bg = 'url(https://cumtcs16.github.io/Random-img/' + random_bg + '.jpg)';
+
+	$("#header-bg-2").css("background-image", bg);
+</script>
+		
+		<!--back to top-->
+        <style type="text/css">
+	#totop {
+		background: white;
+		border-radius: 50%;
+		position: fixed;
+		right: 5.4%;
+		bottom: 80px;
+		cursor: pointer;
+	}
+	
+	#totop a {
+		color: #474747;
+		background-color: transparent;
+		padding: 10px;
+		text-decoration: none;
+	}
+	
+	@media(max-width:512px) {
+		#totop {
+			display: none;
+			visibility: hidden;
+		}
+	}
+</style>
+
+
+	<div id="totop">
+  		<a href="javascript:;" class="fa fa-arrow-up"></a>
+	</div>
+
+	<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+	</html>
+
