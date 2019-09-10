@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		8/30/2019 
+		9/11/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -269,7 +269,7 @@
 <p>2）<strong>无界任务队列LinkedBlockingQueue</strong>：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE；</p>
 <p>3）<strong>直接提交队列synchronousQueue</strong>：这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务。</p>
 <h5 id="拒绝策略"><a href="#拒绝策略" class="headerlink" title="拒绝策略"></a>拒绝策略</h5><p><strong>AbortPolicy</strong>:丢弃任务并抛出RejectedExecutionException</p>
-<p><strong>CallerRunsPolicy</strong>：只要线程池未关闭，该策略直接在调用者线程中，运行当前被丢弃的任务。显然这样做不会真的丢弃任务，但是，任务提交线程的性能极有可能会急剧下降。</p>
+<p><strong>CallerRunsPolicy</strong>：由调用线程处理该任务。只要线程池未关闭，该策略直接在调用者线程中，运行当前被丢弃的任务。显然这样做不会真的丢弃任务，但是，任务提交线程的性能极有可能会急剧下降。</p>
 <p><strong>DiscardOldestPolicy</strong>：丢弃队列中最老的一个请求，也就是即将被执行的一个任务，并尝试再次提交当前任务。</p>
 <p><strong>DiscardPolicy</strong>：丢弃任务，不做任何处理。</p>
 <h5 id="线程池的任务处理策略："><a href="#线程池的任务处理策略：" class="headerlink" title="线程池的任务处理策略："></a>线程池的任务处理策略：</h5><p>如果当前线程池中的线程数目小于corePoolSize，则每来一个任务，就会创建一个线程去执行这个任务；</p>
