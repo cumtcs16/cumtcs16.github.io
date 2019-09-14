@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		9/11/2019 
+		9/14/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -151,6 +151,100 @@
 <div class="am-g am-g-fixed blog-fixed">
 	<div class="am-u-md-12 am-u-sm-12">
 
+		
+			<article class="am-g blog-entry-article">
+
+				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
+					<img src="/coverimg/19.jpg" class="am-u-sm-12">
+				</div>	
+
+				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
+					<span class="theme-annie-post-date">
+						<a href="/2019/09/14/手写LRU缓存机制/" itemprop="url">
+	<time datetime="2019-09-14T12:11:07.000Z" itemprop="datePublished">
+  		2019-09-14
+  </time>
+</a>    
+
+					</span>
+					<span class="theme-annie-post-title">
+						
+	
+		<a href="/2019/09/14/手写LRU缓存机制/" itemprop="url">		
+			收藏的优秀博客文章		
+		</a>
+	
+
+					</span>
+					
+					
+						<p>
+							
+								代码实现LRU缓存机制
+思路：要实现LRU缓存机制要保证：
+O(1) 时间内完成如下操作：1.获取键 / 检查键是否存在2.设置键3.删除最先插入的键4.缓存满时，删除最近最久未用过的键
+对于O(1)时间内完成检索键操作，很容易想到用Hash结构。这里我们可以用HashMap来存储数据。
+对于条件4，我们需要找一个类似队列的结构来把最近最久未使用的和最近使用最多的键分别放到队列的两端，这样方便删、	
+							  
+						</p> 
+					
+
+					
+						<span class="continue-read">      	
+							<a href="/2019/09/14/手写LRU缓存机制/" class="pull-right">
+								展开全文
+							</a>		
+						</span>
+					         		
+				</div>
+		
+			</article>
+		
+			<article class="am-g blog-entry-article">
+
+				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
+					<img src="/coverimg/20.jpg" class="am-u-sm-12">
+				</div>	
+
+				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
+					<span class="theme-annie-post-date">
+						<a href="/2019/09/13/DFS回溯法解决N皇后问题/" itemprop="url">
+	<time datetime="2019-09-13T00:11:07.000Z" itemprop="datePublished">
+  		2019-09-13
+  </time>
+</a>    
+
+					</span>
+					<span class="theme-annie-post-title">
+						
+	
+		<a href="/2019/09/13/DFS回溯法解决N皇后问题/" itemprop="url">		
+			DFS回溯法解n皇后问题		
+		</a>
+	
+
+					</span>
+					
+					
+						<p>
+							
+								DFS回溯法解决N皇后问题思路：因为每一行有n个位置可放置皇后（不考虑合不合理），所以此问题可以抽象出一个n+1层（含根节点）的n叉树。然后对该树进行剪枝（DFS回溯）即可求出可行解。
+手撸代码：
+123456789101112131415161718192021222324252627282930313233343536373839404142import java.util.Arrays;im	
+							  
+						</p> 
+					
+
+					
+						<span class="continue-read">      	
+							<a href="/2019/09/13/DFS回溯法解决N皇后问题/" class="pull-right">
+								展开全文
+							</a>		
+						</span>
+					         		
+				</div>
+		
+			</article>
 		
 			<article class="am-g blog-entry-article">
 
@@ -527,95 +621,6 @@ Java IO面向流意味着每次从流中读一个或多个字节，直至读取�
 					
 						<span class="continue-read">      	
 							<a href="/2019/06/12/IO，NIO和AIO/" class="pull-right">
-								展开全文
-							</a>		
-						</span>
-					         		
-				</div>
-		
-			</article>
-		
-			<article class="am-g blog-entry-article">
-
-				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-					<img src="/coverimg/1.jpg" class="am-u-sm-12">
-				</div>	
-
-				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-					<span class="theme-annie-post-date">
-						<a href="/2019/06/11/比较Java对象属性的不同/" itemprop="url">
-	<time datetime="2019-06-10T22:11:07.000Z" itemprop="datePublished">
-  		2019-06-11
-  </time>
-</a>    
-
-					</span>
-					<span class="theme-annie-post-title">
-						
-	
-		<a href="/2019/06/11/比较Java对象属性的不同/" itemprop="url">		
-			比较Java对象中属性的不同		
-		</a>
-	
-
-					</span>
-					
-					
-						<p>
-							
-								前言今天同事提了一个需求让我做，大概意思在对一个用户的属性进行编辑后，在数据库中记录操作日志，主要就是记录被修改属性修改前后的值。这个问题简化一下就是判断一个类的两个对象属性值的不同。
-两个对象进行比较相等，有两种做法：1,情况一：当仅仅只是判断两个对象是否相等时，只需重写equals()方法即可。2.情况二：当除了情况一之外，还需知道是那个属性不同，那么就需要采用类反射。也可以先把对象转成Jso	
-							  
-						</p> 
-					
-
-					
-						<span class="continue-read">      	
-							<a href="/2019/06/11/比较Java对象属性的不同/" class="pull-right">
-								展开全文
-							</a>		
-						</span>
-					         		
-				</div>
-		
-			</article>
-		
-			<article class="am-g blog-entry-article">
-
-				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-					<img src="/coverimg/19.jpg" class="am-u-sm-12">
-				</div>	
-
-				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-					<span class="theme-annie-post-date">
-						<a href="/2019/05/22/LinkedList源码解读/" itemprop="url">
-	<time datetime="2019-05-22T10:11:07.000Z" itemprop="datePublished">
-  		2019-05-22
-  </time>
-</a>    
-
-					</span>
-					<span class="theme-annie-post-title">
-						
-	
-		<a href="/2019/05/22/LinkedList源码解读/" itemprop="url">		
-			LinkedList源码解读		
-		</a>
-	
-
-					</span>
-					
-					
-						<p>
-							
-								12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210	
-							  
-						</p> 
-					
-
-					
-						<span class="continue-read">      	
-							<a href="/2019/05/22/LinkedList源码解读/" class="pull-right">
 								展开全文
 							</a>		
 						</span>
