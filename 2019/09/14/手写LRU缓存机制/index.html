@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>收藏的优秀博客文章</title>
+	<title>手写LRU缓存机制</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《收藏的优秀博客文章》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《手写LRU缓存机制》</p>
 			
 		
 	
@@ -161,7 +161,7 @@
 					
 	
 		<a href="/2019/09/14/手写LRU缓存机制/" itemprop="url">		
-			收藏的优秀博客文章		
+			手写LRU缓存机制		
 		</a>
 	
 
@@ -200,7 +200,7 @@
 <p>对于O(1)时间内完成检索键操作，很容易想到用Hash结构。这里我们可以用HashMap来存储数据。</p>
 <p>对于条件4，我们需要找一个类似队列的结构来把最近最久未使用的和最近使用最多的键分别放到队列的两端，这样方便删、插。这里我们可以用LinkedList</p>
 <p><strong>具体过程如下：</strong></p>
-<p><img src="/../../../../../imgs/LRU流程.jpg" alt=""></p>
+<p><img src="/imgs/LRU流程.jpg" alt=""></p>
 <p><strong>代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Queue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span> </span>&#123;</span><br><span class="line">	List&lt;Integer&gt; qu=<span class="keyword">new</span> LinkedList&lt;Integer&gt;();<span class="comment">//存键，方便淘汰</span></span><br><span class="line">	HashMap&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap();<span class="comment">//存数据</span></span><br><span class="line">	<span class="keyword">int</span> capacity;<span class="comment">//LRU容量</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;<span class="comment">//设置LRU容量</span></span><br><span class="line">        <span class="keyword">this</span>.capacity=capacity; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">int</span> <span class="title">get</span><span class="params">(Integer key)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(!qu.isEmpty()&amp;&amp;!map.isEmpty()&amp;&amp;map.containsKey(key))&#123;</span><br><span class="line">    		qu.remove(key);</span><br><span class="line">    		qu.add(key);<span class="comment">//以上两步把键挪到队尾</span></span><br><span class="line">    		<span class="keyword">return</span> map.get(key);<span class="comment">//返回对应键的值</span></span><br><span class="line">    	&#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//对应键的值不存在</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">put</span><span class="params">(Integer key, Integer value)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">if</span> (map.containsKey(key)) &#123;<span class="comment">//键已存在，修改</span></span><br><span class="line">    		qu.remove(key);</span><br><span class="line">    		qu.add(key);<span class="comment">//键挪到队尾</span></span><br><span class="line">    		map.put(key, value);<span class="comment">//放入新键值</span></span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(map.size()&lt;capacity)&#123;<span class="comment">//LRU未满，直接放入</span></span><br><span class="line">        	qu.add(key);</span><br><span class="line">        	map.put(key, value);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;<span class="comment">//LRU已满</span></span><br><span class="line">        	<span class="keyword">int</span> delkey=qu.remove(<span class="number">0</span>);<span class="comment">//淘汰最近最久未使用的键</span></span><br><span class="line">        	map.remove(delkey);</span><br><span class="line">        	qu.add(key);<span class="comment">//插入新键值</span></span><br><span class="line">        	map.put(key, value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>菜鸡吗，写代码难免会有不足。通过分析以上代码，我们发现，get和put（当键已存在时）操作的时间复杂度并不是O(1)而是O(n)，这是因为这两个操作要去linkedlist中删除对应的键，linkedlist删除键时会遍历和比较。</p>
