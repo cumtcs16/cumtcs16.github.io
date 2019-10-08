@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		9/26/2019 
+		10/8/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -292,7 +292,7 @@
 <li>TreeSet</li>
 </ul>
 <p><strong>方法简介</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Set接口仅包含从Collection继承的方法（所以在这里我就不赘述了，因为我是个懒蛋，略略略~），并添加禁止重复元素</span><br><span class="line">的限制，Set还为equals和hashCode操作的行为添加了一个更强的契约，允许Set实例有意义地进行比较，即使它们的实现</span><br><span class="line">不同，如果两个Set实例包含相同的元素，则它们是相等的。</span><br></pre></td></tr></table></figure>
+<p>Set接口仅包含从Collection继承的方法（所以在这里我就不赘述了，因为我是个懒蛋，略略略~），并添加禁止重复元素<br>的限制，Set还为equals和hashCode操作的行为添加了一个更强的契约，允许Set实例有意义地进行比较，即使它们的实现<br>不同，如果两个Set实例包含相同的元素，则它们是相等的。</p>
 <p><strong>注</strong>：</p>
 <p>它使用equals()方法进行比较，如果返回true，两个对象的HashCode值也应该相等。</p>
 <h5 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h5><p><strong>简介：</strong></p>
@@ -320,8 +320,8 @@
 <p>2、如果两个对象的hashCode相同，它们并不一定相同  ；  </p>
 <p>上面说的对象相同指的是用eqauls方法比较。你当然可以不按要求去做了，但你会发现，相同的对象可以出现在Set集合中。同时，增加新元素的效率会大大下降。</p>
 <p>hashcode这个方法是用来鉴定2个对象是否相等的。 那你会说，不是还有equals这个方法吗？ 不错，这2个方法都是用来判断2个对象是否相等的。但是他们是有区别的。 一般来讲，equals这个方法是给用户调用的，如果你想判断2个对象是否相等，你可以重写equals方法，然后在代码中调用，就可以判断他们是否相等 了。简单来讲，equals方法主要是用来判断从表面上看或者从内容上看，2个对象是不是相等。</p>
-<p>举个例子，有个学生类，属性只有姓名和性别，那么我们可以 认为只要姓名和性别相等，那么就说这2个对象是相等的。</p>
-<p>hashcode方法一般用户不会去调用，比如在hashmap中，由于key是不可以重复的，他在判断key是不是重复的时候就判断了hashcode 这个方法，而且也用到了equals方法。这里不可以重复是说equals和hashcode只要有一个不等就可以了！所以简单来讲，hashcode相 当于是一个对象的编码，就好像文件中的md5，他和equals不同就在于他返回的是int型的，比较起来不直观。我们一般在覆盖equals的同时也要 覆盖hashcode，让他们的逻辑一致。</p>
+<p>举个例子，有个学生类，属性只有姓名和性别，那么我们可以认为只要姓名和性别相等，那么就说这2个对象是相等的。</p>
+<p>hashcode方法一般用户不会去调用，比如在hashmap中，由于key是不可以重复的，他在判断key是不是重复的时候就判断了hashcode 这个方法，而且也用到了equals方法。这里不可以重复是说equals和hashcode只要有一个不等就可以了！所以简单来讲，hashcode相当于是一个对象的编码，就好像文件中的md5，他和equals不同就在于他返回的是int型的，比较起来不直观。我们一般在覆盖equals的同时也要 覆盖hashcode，让他们的逻辑一致。</p>
 <p>举个例子，还是刚刚的例子，如果姓名和性别相等就算2个对象相等的话，那么hashcode的方法也要返回姓名 的hashcode值加上性别的hashcode值，这样从逻辑上，他们就一致了。 要从物理上判断2个对象是否相等，用==就可以了。</p>
 <h5 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h5><p><strong>简介</strong>：LinkedHashSet集合同样是根据元素的hashCode值来决定元素的存储位置，但是它同时使用链表(双向)维护元素的次序。这样使得元素看起 来像是以插入顺 序保存的，也就是说，当遍历该集合时候，LinkedHashSet将会以元素的添加顺序访问集合的元素。</p>
 <p><strong>与HashSet比较</strong>：LinkedHashSet在迭代访问Set中的全部元素时，性能比HashSet好，但是插入时性能稍微逊色于HashSet。</p>
